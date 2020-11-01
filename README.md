@@ -13,13 +13,14 @@ sent, lyric by lyric, to the recipient of their choosing. Although this could be
 is a way to let your friends and family know that you are thinking about them, and the songs that you choose can reflect that. By providing the flexability 
 to the user to search for songs and send messages to their friends and family without even having them pick up their phone is a feature that greatly simplifies
 their experience. Another feature we will like to implement adds some more fun into the mix for the user themself. We will have a mini game hosted on the site 
-that lets the users guess the name of a song given a sequence of lyrics to that song. To conclude, we also want the user interface of our
-application to look inviting and friendly, to do this we will use different styling techniques to get the look we desire across.
+that lets the users guess the name of a song given a sequence of lyrics. To conclude, we also want the user interface of our application to look inviting
+and friendly, to do this we will use different styling techniques to get the look we desire across.
 
 ## Vision Statement:
 
 ## Personas:
-- 
+- Lisa, age 24, is a musician who recently got married in Nashville, Tennessee, a place known for its music. Lisa is a music enthuasiast and after getting her music degree from Vanderbilt University she began song writing. In school, she learned to focus more on what the lyrics of a song are saying rather than the overall melody of the song. Because 
+of this, she loves to write love music where the lyrics have deep meaning. Lisa has been a song writer for about three years now and recently started putting her love music on different platforms, notable Spotify, Genius and Apple Music. To surprise and show her husband, Johnny, who has yet to find out Lisa started releasing her music, that she loves him, she wrote him a song. Lisa, not being technically advanced, sought out to find an application that would send the lyrics of her songs to her husband, one by one, because she wants him to show him the affection the words of her song give off. Knowing this, Lyrical Genius would be great for her. Since she is not technically advaned, our UI provides a simplistic interface where all she has to do is search her song and send the Lyrics right to her lover, Johnny.
 - 
 - 
 - 
