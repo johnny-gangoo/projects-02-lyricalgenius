@@ -2,8 +2,8 @@
 ###  Team Members: 
 - Johnny Gangoo
 - Kyle Skelly
-- Vlad 
-- Jason
+- Vlad K.
+- Jason Xhoxhi
 
 ## Project Overview: 
 
