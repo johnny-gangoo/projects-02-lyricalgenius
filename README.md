@@ -1,4 +1,4 @@
-# Lyrcial Genius
+# Lyrical Genius
 ###  Team Members: 
 - Johnny Gangoo
 - Kyle Skelly
