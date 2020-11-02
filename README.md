@@ -2,7 +2,7 @@
 ###  Team Members: 
 - Johnny Gangoo
 - Kyle Skelly
-- Vlad K.
+- Vlad Karepov
 - Jason Xhoxhi
 
 ## Project Overview: 
