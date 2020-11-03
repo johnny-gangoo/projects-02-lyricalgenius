@@ -26,13 +26,19 @@ need something like an AWS EC2 instance to keep our server (subject to change de
 **Johnny Gangoo:** after hearing the feedback from the team, I believe there is room for improvement within the initial application, our main
 priority within the first few weeks is to get the core functionality down. Then from there, implement any additional features that we discuss.
 
+**Kyle Skelly:** I believe that getting the basic functionality early will be very important due to the group wanting to add a variety of features. After achieving this functionality, the group will have some tough decisions to make in regards to features and whether to include them or leave them out.
+
 ## Feedbacks
 **Johnny Gangoo:** overall the project seems fair for all members, we are all ready to learn and build Lyrical Genius with tools we have previously
 used and also learn/use new tools along the way.
 
+**Kyle Skelly:** The project is going very smoothly so far. All group members are meeting on time as well as getting all of their necessary work done. There seems to be a concensus on what the group's vision is for the project and I believe this universal understanding of a common endgoal will allow us to move quickly.
+
 ## Expectations
 **Johnny Gangoo:** For this project I expect the team members to be available to meet roughly 1-3 times per week to discuss project details, as well 
 as complete there part of the sprints.
+
+**Kyle Skelly:** I expect the group to be willing to meet weekly as well as keep in contact when not in meetings. I also expect for group members to work on this assignment outside of our grouptimes. 
 
 ## Required Resources
 Students participating in this assignment will need the follow:
