@@ -17,6 +17,8 @@ and friendly, to do this we will use different styling techniques to get the loo
 
 ## Vision Statement:
 
+FOR music lovers WHO want an easy way to send lyrics to their loved ones, Lyrical Genius is a website THAT streamlines the finding and sending of lyrics, UNLIKE searching through google and copying/pasting, OUR product can find and send the lyrics all in a fraction of the time, all from a single webpage.
+
 ## Personas:
 - Lisa, age 24, is a musician who recently got married in Nashville, Tennessee, a place known for its music. Lisa is a music enthuasiast and after getting her music degree from Vanderbilt University she began song writing. In school, she learned to focus more on what the lyrics of a song are saying rather than the overall melody of the song. Because 
 of this, she loves to write love music where the lyrics have deep meaning. Lisa has been a song writer for about three years now and recently started putting her love music on different platforms, notable Spotify, Genius and Apple Music. To surprise and show her husband, Johnny, who has yet to find out Lisa started releasing her music, that she loves him, she wrote him a song. Lisa, not being technically advanced, sought out to find an application that would send the lyrics of her songs to her husband, one by one, because she wants him to show him the affection the words of her song give off. Knowing this, Lyrical Genius would be great for her. Since she is not technically advanced, our UI provides a simplistic interface where all she has to do is search her song and send the Lyrics right to her lover, Johnny.
