@@ -28,17 +28,23 @@ priority within the first few weeks is to get the core functionality down. Then 
 
 **Kyle Skelly:** I believe that getting the basic functionality early will be very important due to the group wanting to add a variety of features. After achieving this functionality, the group will have some tough decisions to make in regards to features and whether to include them or leave them out.
 
+**Jason Xhoxhi:** The project has a strong base which will offer great and smooth functionality to users and also gives us room to expand and add new ideas which would help build out the application overall. I believe that the way we have structed it will allow us to adapt it to face user needs.
+
 ## Feedbacks
 **Johnny Gangoo:** overall the project seems fair for all members, we are all ready to learn and build Lyrical Genius with tools we have previously
 used and also learn/use new tools along the way.
 
 **Kyle Skelly:** The project is going very smoothly so far. All group members are meeting on time as well as getting all of their necessary work done. There seems to be a concensus on what the group's vision is for the project and I believe this universal understanding of a common endgoal will allow us to move quickly.
 
+**Jason Xhoxhi:** Project planning and meetings have been going very well with encouragement on new ideas. The whole group is excited to start working on the project and to learn the new technologies it will be built with. Everyone seems on the same page with time and getting together as well.
+
 ## Expectations
 **Johnny Gangoo:** For this project I expect the team members to be available to meet roughly 1-3 times per week to discuss project details, as well 
 as complete there part of the sprints.
 
 **Kyle Skelly:** I expect the group to be willing to meet weekly as well as keep in contact when not in meetings. I also expect for group members to work on this assignment outside of our grouptimes. 
+
+**Jason Xhoxhi:** I expect that everyone will be able to come together at least once a week to meet as well as being able to communicate together to convey ideas. Also being able to ask questions and get answers in a reasonable amount of time.
 
 ## Required Resources
 Students participating in this assignment will need the follow:
