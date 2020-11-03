@@ -17,7 +17,7 @@ and friendly, to do this we will use different styling techniques to get the loo
 
 ## Vision Statement:
 
-FOR music lovers WHO want an easy way to send lyrics to their loved ones, Lyrical Genius is a website THAT streamlines the finding and sending of lyrics, UNLIKE searching through google and copying/pasting, OUR product can find and send the lyrics all in a fraction of the time, all from a single webpage.
+FOR music lovers WHO want an easy way to send lyrics to their loved ones, Lyrical Genius is a website THAT streamlines the finding and sending of lyrics, UNLIKE searching through google and copying/pasting, OUR product can find and send the lyrics all in a fraction of the time, all from a single webpage. Not only is it simple, fast and free, but also a convienent way for you to send messages without even having to pick up your cellular device. 
 
 ## Personas:
 - Lisa, age 24, is a musician who recently got married in Nashville, Tennessee, a place known for its music. Lisa is a music enthuasiast and after getting her music degree from Vanderbilt University she began song writing. In school, she learned to focus more on what the lyrics of a song are saying rather than the overall melody of the song. Because 
