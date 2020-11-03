@@ -23,10 +23,16 @@ these packages. For the front end, react will need to be installed on your syste
 need something like an AWS EC2 instance to keep our server (subject to change depending on what the group prefers), made by Node, active.
 
 ## Insights
+**Johnny Gangoo:** after hearing the feedback from the team, I believe there is room for improvement within the initial application, our main
+priority within the first few weeks is to get the core functionality down. Then from there, implement any additional features that we discuss.
 
 ## Feedbacks
+**Johnny Gangoo:** overall the project seems fair for all members, we are all ready to learn and build Lyrical Genius with tools we have previously
+used and also learn/use new tools along the way.
 
 ## Expectations
+**Johnny Gangoo:** For this project I expect the team members to be available to meet roughly 1-3 times per week to discuss project details, as well 
+as complete there part of the sprints.
 
 ## Required Resources
 Students participating in this assignment will need the follow:
