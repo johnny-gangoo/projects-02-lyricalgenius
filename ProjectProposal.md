@@ -22,6 +22,12 @@ Installation involves downloading the npm packages, but before that you must dow
 these packages. For the front end, react will need to be installed on your system. Also to allow any user to connect we will 
 need something like an AWS EC2 instance to keep our server (subject to change depending on what the group prefers), made by Node, active.
 
+## Insights
+
+## Feedbacks
+
+## Expectations
+
 ## Required Resources
 Students participating in this assignment will need the follow:
  *  HTML
