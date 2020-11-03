@@ -1,5 +1,8 @@
 # Lyrical Genius
-###  Team Members: 
+
+### <a href="https://trello.com/b/JYVoySYk/lyrical-genius-application">Trello Board</a>
+
+### Team Members: 
 - Johnny Gangoo
 - Kyle Skelly
 - Vlad Karepov
