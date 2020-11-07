@@ -5,18 +5,27 @@ class GetUserInput extends Component {
     constructor(props){
         super(props)
         this.state = {
-            SongName: null,
-            artistName: null
+            SongName: "",
+            artistName: "",
+            songData: ""
         }
+        this.initialState=this.state;
     }
 
     handleSubmit = (event) => {
         //this will prevent data from refreshing
         event.preventDefault();
         //axios post will send the data to the backend in JSON format
+
         axios.post("http://localhost:3001/getLyrics", this.state).then(res => {
             //need to show response to user
-            console.log(res);
+            //this.setState({songData: res});
+            res = res.data
+            if(res == null){
+                this.setState = this.initialState;
+            }else{
+            this.setState({songData:res});
+            }
         })
         .catch(error => {
             console.log(error.response)
@@ -37,7 +46,7 @@ class GetUserInput extends Component {
     render () {
         //below is the same as saying SongName = this.state.SongName
         //and artistName = this.state.artistName
-        const {SongName, artistName} = this.state
+        const {SongName, artistName, songData} = this.state
         return (
             <div>
                 <h1>Input Form</h1>
@@ -48,6 +57,7 @@ class GetUserInput extends Component {
                     <p><input type='text' placeholder='Enter the Artist name' name='artistName' onChange={this.handleInputChange}/></p>
                     <p><button>Submit</button></p>
                 </form>
+                <img src={songData.albumArt}></img>
             </div>
         )
     }
