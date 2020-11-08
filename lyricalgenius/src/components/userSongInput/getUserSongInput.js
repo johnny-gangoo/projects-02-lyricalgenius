@@ -17,14 +17,16 @@ class GetUserInput extends Component {
         event.preventDefault();
         //axios post will send the data to the backend in JSON format
 
-        axios.post("http://localhost:3001/getLyrics", this.state).then(res => {
+        axios.post("http://localhost:3001/getSong", this.state).then(res => {
             //need to show response to user
             //this.setState({songData: res});
-            res = res.data
+            res = res.data;
             if(res == null){
                 this.setState = this.initialState;
+            }else if(res.length == 1){
+                this.setState({songData:res[0]});
             }else{
-            this.setState({songData:res});
+                this.setState({songData:res});
             }
         })
         .catch(error => {
