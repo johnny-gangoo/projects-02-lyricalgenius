@@ -45,6 +45,6 @@ module.exports = async function (songData) {
             console.log(result);
             return song;
         }
-        console.log(result);
+        //console.log(result);
         return result;
 }

@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 const bodyParser = require("body-parser");
 var genius = require("./genius_api/getSongData");
+var parseLyrics = require("./genius_api/parseSongLyrics");
 const port = 3001;
 
 app.use(bodyParser.urlencoded({
@@ -18,6 +19,7 @@ app.use(function (req, res, next) {
 
 app.post('/getSong', async (request, response) =>{
   let data = await genius(request.body);
+  parseLyrics(data.lyrics);
   //send the lyrics (in string format) 
   //to the frontend for the user to view
    response.send(data);
