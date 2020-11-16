@@ -33,16 +33,20 @@ module.exports = async function (songData) {
     if(searchResult == null || searchResult.length < 0){
         return null;
     }else if(searchResult.length==1){
-        return searchResult;
+        let song = await genius.getSong(options);
+        //console.log(song.lyrics);
+        //console.log(result);
+        return song;
     }
     var result = searchResult.map(checkSongTitle) 
         result = result.filter(function(element){
             return element !== undefined;
         });
+        console.log(result.length);
         if(result.length==1){
             let song = await genius.getSong(options);
-            console.log(song.lyrics);
-            console.log(result);
+            //console.log(song.lyrics);
+            //console.log(result);
             return song;
         }
         //console.log(result);
