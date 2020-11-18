@@ -5,15 +5,23 @@ const genius = require('genius-lyrics-api');
 
 module.exports = function (songData) {
     var lyrics = songData.split("\n\n"); //splits into an array with each new line being a new element
-     let uniqueChars = lyrics.filter((c, index) => {
+
+     let filteredLyrics = lyrics.filter((c, index) => {
          return lyrics.indexOf(c) === index;
      });
-     for(var i = 0; i < uniqueChars.length; i++)
+     for(var i = 0; i < lyrics.length; i++)
      {
-        uniqueChars[i] = uniqueChars[i].replace(/(\r\n|\n|\r|`)/gm, " ");
+        lyrics[i] = lyrics[i].replace(/(\r\n|\n|\r|`)/gm, " ");
+     }
+     for(var j = 0; j < filteredLyrics.length; j++)
+     {
+        filteredLyrics[j] = filteredLyrics[j].replace(/(\r\n|\n|\r|`)/gm, " ");
      }
     //UNCOMMENT TO VIEW LYRICS IN CONSOLE
-    //console.log(uniqueChars); 
-    return uniqueChars;
+    //console.log(filteredLyrics); 
+    return {
+        uniqueLyrics: filteredLyrics,
+        originalyrics: lyrics
+    }
 
 }
