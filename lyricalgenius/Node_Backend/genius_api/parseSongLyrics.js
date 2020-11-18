@@ -10,11 +10,10 @@ module.exports = function (songData) {
      });
      for(var i = 0; i < uniqueChars.length; i++)
      {
-         //uniqueChars[i].replace("\n", "");
-        uniqueChars[i] = uniqueChars[i].replace(/(\r\n|\n|\r)/gm, " ");
+        uniqueChars[i] = uniqueChars[i].replace(/(\r\n|\n|\r|`)/gm, " ");
      }
-     console.log(uniqueChars); 
-    // var compare = uniqueChars[1].localeCompare(uniqueChars[3]);
-    // console.log(compare);
+    //UNCOMMENT TO VIEW LYRICS IN CONSOLE
+    //console.log(uniqueChars); 
+    return uniqueChars;
 
 }
