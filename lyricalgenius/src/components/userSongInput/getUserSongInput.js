@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './getUserSongInput.css';
+import ListView from './songListComponent';
 
 class GetUserInput extends Component {
     constructor(props) {
@@ -8,11 +9,10 @@ class GetUserInput extends Component {
         this.state = {
             title: "",
             name: "",
+            onSubmitClick: false,
             songData: [],
-            optionsFlag: false,
             preview: []
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.initialState = this.state;
     }
 
@@ -22,22 +22,18 @@ class GetUserInput extends Component {
             event.preventDefault();
             axios.post("http://localhost:3001/getSong", this.state).then(res => {
                 res = res.data;
-                console.log(res);
-                if (res.length==0) {
+                if (res.length === 0) {
                     this.setState = this.initialState;
-                    alert("The song entered was not found");
+                    alert("song/artist could not be found");
                     window.location.reload(false);
-                } else if (res.length === 1) {
-                    this.setState({ songData: res[0], optionsFlag: false });
                 } else {
-                    this.setState({ songData: res, optionsFlag: true });
+                    console.log("HI");
+                    this.setState({ songData: res, onSubmitClick: true});
                 }
-
                 this.handleSongPreview(this.state.songData)
-            })
-                .catch(error => {
-                    console.log(error.response)
-                });
+            }).catch(error => {
+                console.log(error)
+            });
         }
     }
 
@@ -48,16 +44,7 @@ class GetUserInput extends Component {
         });
     }
 
-    handleListItemOnClick = (songObj) => {
-        axios.post("http://localhost:3001/getLyrics", songObj).then(res => {
-            res = res.data;
-            this.setState({ songData: [] });
-            this.setState({ songData: res, optionsFlag: false });
-        })
-            .catch(error => {
-                console.log(error.response)
-            });
-    }
+
 
     handleSongPreview = (songObj) => {
         if (this.state.preview.length !== 0) {
@@ -77,18 +64,11 @@ class GetUserInput extends Component {
         ))
     }
 
-    returnSongPreview = (prev) => {
-        var n = prev;
-        return n;
+    handleCallBack = () => {
+        this.setState({onSubmitClick:false});
+        console.log("HIIIII");
     }
 
-    pauseOtherAudioPreviews = (event) => {
-        for(const audio of document.querySelectorAll('audio')){
-            if(audio !== event.currentTarget){
-                audio.pause();
-            }
-        }
-    }
 
     render() {
         const { title, name, songData } = this.state
@@ -101,30 +81,13 @@ class GetUserInput extends Component {
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <p><input type='text' placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} /></p>
                     <p><input type='text' placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} /></p>
-                    <p><button>Submit</button></p>
+                    <button>Submit</button>
                 </form>
-                {this.state.optionsFlag ? (
-                    this.state.songData.map((songObj, index) => (
-                        <li onClick={this.handleListItemOnClick.bind(this, songObj)} key={index}>
-                            <div>
-                                <p>{songObj.title}  {songObj.name}</p>
-                                {this.state.preview[index] === "" && 
-                                    <h1>test</h1>
-                                } 
-
-                                {this.state.preview[index] !== "" && 
-                                    <audio src={this.returnSongPreview(this.state.preview[index])} controls="controls"
-                                    onPlay={this.pauseOtherAudioPreviews} type='audio/mpeg'></audio>
-                                }
-                        
-                            </div>
-                        </li>
-                    ))
-                ) : (
-                        <div>
-                            <img src={songData.albumArt}></img>
-                        </div>
-                    )}
+                {this.state.onSubmitClick === true &&
+                    <div>
+                    <ListView songData={songData} preview={this.state.preview} onSubmitClick={this.state.onSubmitClick} handleCallBack={this.handleCallBack}/>
+                    </div>
+                }
             </div>
         )
     }
