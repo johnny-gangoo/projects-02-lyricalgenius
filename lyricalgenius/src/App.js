@@ -1,12 +1,12 @@
 import './App.css';
-import GetUserInput from './components/userSongInput/getUserSongInput.js';
+import LoginRegisterPage from './components/pages/loginregister.js';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <div>
-          <GetUserInput />
+          <LoginRegisterPage />
         </div>
       </header>
     </div>
