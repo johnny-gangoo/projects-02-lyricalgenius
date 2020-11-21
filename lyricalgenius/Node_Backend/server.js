@@ -3,7 +3,7 @@ var app = express();
 const bodyParser = require("body-parser");
 var genius = require("./genius_api/getSongData");
 var deezer = require('./deezer_api/deezerAPI');
-
+var parseSongLyrics = require('./genius_api/parseSongLyrics');
 const port = 3001;
 
 
@@ -19,27 +19,18 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 app.post('/getSong', async (request, response) =>{
   let songData = await genius.song(request.body);
-
-  if(songData.length == 1){
-      var songLyrics = await genius.lyrics(request.body);
-      console.log(songLyrics.lyrics);
-  }
-    response.send(songData);
+  response.send(songData);
 });
 
 app.post('/getLyrics', async (request, response) =>{
    let songData = await genius.lyrics(request.body);
-   //will need to send the lyrics to the parsing function
-   //console.log(songData)
-   console.log(songData.lyrics);
-   response.send(songData);
+   var lyrics = parseSongLyrics(songData.lyrics);
+   response.send(lyrics);
 });
 
 app.post('/getPreview', async (request, response) =>{
-    //console.log(request.body);
    let songData = await deezer(request.body).catch(error => {
    console.log(error.response)});
    if(songData == undefined){

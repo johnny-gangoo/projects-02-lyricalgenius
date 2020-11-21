@@ -5,12 +5,6 @@ global.apiKey = "GaXTYV3DtHSYpUqMrNjOO7sgHm-dFUmYRLWY2Pg4UPhD4gvYLkXS28EoAV0SUej
 
 let song = async function (songData) {
 
-    // const songD = {
-    //     artistName: "lil uzi vert",
-    //     songName: "20 min"
-    // }
-    // deezer(songD);
-
     options = {
         apiKey: global.apiKey,
         title: songData.title,
@@ -26,15 +20,16 @@ let song = async function (songData) {
         let optionsArtist = options.artist.toLowerCase();
         if(theSongTitle == optionsTitle && theArtist == optionsArtist){
             return songData;  
-        }else if(theSongTitle == optionsTitle || theArtist == optionsArtist){
+        }else if(theSongTitle == "" && theArtist.includes(optionsArtist)){
             return songData;
         }else if(theSongTitle.includes(optionsTitle) && theArtist == optionsArtist){
+            return songData;
+        }else if(theSongTitle == optionsTitle && theArtist.includes(optionsArtist)){
             return songData;
         }
     }
     
     var searchResult = await genius.searchSong(options);
-    console.log(searchResult.length);
     if(searchResult == null || searchResult.length < 0){
         return null;
     }else if(searchResult.length==1){
@@ -55,11 +50,9 @@ let lyrics = async function (userSongChoice) {
         artist: userSongChoice.name,
         optimizeQuery: true
     };
-
     let song = await genius.getSong(options).catch(error => {
         console.log(error.response)
     });
     return song;
-
 }
 module.exports = {song, lyrics};
