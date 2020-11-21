@@ -42,58 +42,51 @@ app.post('/createAccount', async (request, response) =>{
         const collection = db.db("lyricalgeniusdb1").collection("c1");
         // perform actions on the collection object
         // first make sure user does not already exist
-        const query = { "username": { "$eq": request.body.Username}};
+        const query = { "username": { "$eq": request.body.username}};
         const projection = {"quantity": 0};
         collection.findOne(query,projection)
             .then(result => {
                 if(result) {
-                    retVal = "Username already exists.";
-                    console.log("Username already exists.")
+                    response.send("User already exists.");
                 } else {
-                    bcrypt.hash(request.body.Password, salt, (err,hash) => {
-                        let user = {username: request.body.Username, password: hash};
+                    bcrypt.hash(request.body.password, salt, (err,hash) => {
+                        let user = {username: request.body.username, email: request.body.email, firstname: request.body.fname, lastname: request.body.lname, phonenumber: request.body.pnumber, password: hash};
                         collection.insertOne(user).then(result => {
-                            retVal = "Account created.";
-                            console.log("Account created.")
+                            response.send("Account created");
                         });
                     }); 
                 }
             })
             .catch(err => console.error(`Failed to find document: ${err}`));
-        
     });
-    return retVal;
 });
 
 app.post('/login', async (request, response) =>{
-    let retVal = "";
+    var retVal = "";
     db.connect(err => {
         const collection = db.db("lyricalgeniusdb1").collection("c1");
         // perform actions on the collection object
         // first make sure user does not already exist
-        const query = { "username": { "$eq": request.body.Username}};
+        const query = { "username": { "$eq": request.body.username}};
         const projection = {"quantity": 0};
         collection.findOne(query,projection)
             .then(result => {
                 if(result) {
-                    bcrypt.compare(request.body.Password, result.password, function(error, response) {
-                        if(response){
-                            console.log("Successful login");
-                            retVal = "Successful login";
+                    bcrypt.compare(request.body.password, result.password, function(error, res) {
+                        if(res){
+                            response.send("Successful Login");
                         }
                         else{
-                            console.log("Incorrect Password");
-                            retVal = "Incorrect Password";
+                            response.send("Incorrrect Password");
                         }
                     });
                 } else {
-                    console.log("No account with that username");
-                    retVal = "No account with that username";
+                    response.send("No account with that username");
                 }
             })
             .catch(err => console.error(`Failed to find document: ${err}`));
-    });
-    return retVal;
+    })
+    
 });
 
 app.listen(port, () => console.log("Hello from the backend server"));
