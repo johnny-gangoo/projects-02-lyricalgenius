@@ -2,6 +2,8 @@ var express = require("express");
 var app = express();
 const bodyParser = require("body-parser");
 var genius = require("./genius_api/getSongData");
+var deezer = require('./deezer_api/deezerAPI');
+var parseSongLyrics = require('./genius_api/parseSongLyrics');
 const port = 3001;
 
 //Requirements for hashing passwords
@@ -12,6 +14,7 @@ const salt = 10;
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority";
 const db = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
+
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -26,14 +29,23 @@ app.use(function (req, res, next) {
 });
 
 app.post('/getSong', async (request, response) =>{
-  let data = await genius(request.body);
-  //send the lyrics (in string format) 
-  //to the frontend for the user to view
-   response.send(data);
+  let songData = await genius.song(request.body);
+  response.send(songData);
 });
 
 app.post('/getLyrics', async (request, response) =>{
-   //**************************************//
+   let songData = await genius.lyrics(request.body);
+   var lyrics = parseSongLyrics(songData.lyrics);
+   response.send(lyrics);
+});
+
+app.post('/getPreview', async (request, response) =>{
+   let songData = await deezer(request.body).catch(error => {
+   console.log(error.response)});
+   if(songData == undefined){
+       response.send("");
+   }
+    response.send(songData);
 });
 
 app.post('/createAccount', async (request, response) =>{

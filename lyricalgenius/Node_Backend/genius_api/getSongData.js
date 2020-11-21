@@ -1,16 +1,14 @@
 const { default: Axios } = require("axios");
 const genius = require('genius-lyrics-api');
 
+global.apiKey = "GaXTYV3DtHSYpUqMrNjOO7sgHm-dFUmYRLWY2Pg4UPhD4gvYLkXS28EoAV0SUeje";
 
-//need to alter this function to instead just return the json response of songs
-//eventually the onClick when they choose that song will call another fn possibly
-//getSongLyrics in the backend to get the lyrics of that song
-module.exports = async function (songData) {
+let song = async function (songData) {
 
     options = {
-        apiKey: 'GaXTYV3DtHSYpUqMrNjOO7sgHm-dFUmYRLWY2Pg4UPhD4gvYLkXS28EoAV0SUeje',
-        title: songData.SongName,
-        artist: songData.artistName,
+        apiKey: global.apiKey,
+        title: songData.title,
+        artist: songData.name,
         optimizeQuery: true
     };
 
@@ -22,9 +20,11 @@ module.exports = async function (songData) {
         let optionsArtist = options.artist.toLowerCase();
         if(theSongTitle == optionsTitle && theArtist == optionsArtist){
             return songData;  
-        }else if(theSongTitle == optionsTitle || theArtist == optionsArtist){
+        }else if(theSongTitle == "" && theArtist.includes(optionsArtist)){
             return songData;
         }else if(theSongTitle.includes(optionsTitle) && theArtist == optionsArtist){
+            return songData;
+        }else if(theSongTitle == optionsTitle && theArtist.includes(optionsArtist)){
             return songData;
         }
     }
@@ -39,12 +39,20 @@ module.exports = async function (songData) {
         result = result.filter(function(element){
             return element !== undefined;
         });
-        if(result.length==1){
-            let song = await genius.getSong(options);
-            console.log(song.lyrics);
-            console.log(result);
-            return song;
-        }
-        console.log(result);
-        return result;
+    return result;
 }
+
+let lyrics = async function (userSongChoice) {
+
+    options = {
+        apiKey: global.apiKey,
+        title: userSongChoice.title,
+        artist: userSongChoice.name,
+        optimizeQuery: true
+    };
+    let song = await genius.getSong(options).catch(error => {
+        console.log(error.response)
+    });
+    return song;
+}
+module.exports = {song, lyrics};
