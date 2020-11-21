@@ -19,28 +19,22 @@ class Register extends Component {
         event.preventDefault();
         //axios post will send the data to the backend in JSON format
         axios.post("http://localhost:3001/createAccount", this.state).then(res => {
-            console.log(res.data);
+            console.log(res);
         })
         .catch(error => {
             console.log(error.response)
         });
     }
 
-    handleInputChange (event) {
-        const name = event.target.name;
-        const val = event.target.value;
-        this.setState({[name]: val}, () => {
-            this.validate(name, val);
+    handleInputChange = (event) => {
+        event.preventDefault();
+        this.setState({
+            //you can specify multiple inputs here
+            //they just need to have different names 
+            //brackets are used to dynamically update
+            //object key name
+           [event.target.name] : event.target.value
         });
-
-        // switch(name){
-        //     case 'username':
-                
-        //     case 'password':
-                
-        //     default:
-        //         break;
-        // }
     }
 
     render () {
@@ -50,13 +44,13 @@ class Register extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>Username</label>
                     <br/>
-                    <input type='text' placeholder='Username' name='Username' value={this.state.username} onChange={(event) => this.handleInputChange(event)}/>
+                    <input type='text' placeholder='Username' name='Username' onChange={this.handleInputChange}/>
                     <br/>
                     <span id="username-error"></span>
                     <br/>
                     <label>Password</label>
                     <br/>
-                    <input type='password' placeholder='Password' name='Password' value={this.state.password} onChange={(event) => this.handleInputChange(event)}/>
+                    <input type='password' placeholder='Password' name='Password' onChange={this.handleInputChange}/>
                     <br/>
                     <span id="password-error"></span>
                     <p><button onClick={this.handleValidation}>Register</button></p>

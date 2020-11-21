@@ -1,55 +1,101 @@
+
+// Imports
 import React, {Component} from 'react';
+import Account from './user.js';
 import axios from 'axios';
 
+// Login Component
 class Login extends Component {
     constructor(props){
         super(props)
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            errors: {username: "",password: ""},
+            userValid: false,
+            passValid: false,
+            submitRes: ""
         }
-        this.initialState=this.state;
     }
 
+    // Handles form submit
     handleSubmit = (event) => {
-        //this will prevent data from refreshing
+        // This will prevent data from refreshing
         event.preventDefault();
-        //axios post will send the data to the backend in JSON format
-        console.log(event);
-        axios.post("http://localhost:3001/login", this.state).then(res => {
-            //need to show response to user
-            //this.setState({songData: res});
 
-            //need to see if i can just set songData:res and not res[0] by checking length of res upon response
+        // Clears the submit message
+        this.setState({
+            submitRes: ""
         })
-        .catch(error => {
-            console.log(error.response)
-        });
+
+        // Only allow submit if the form is filled correctly
+        if(this.state.userValid && this.state.passValid){
+            axios.post("http://localhost:3001/login", this.state).then((response) => {
+                if(response.data == "Successful Login"){
+                    Account.setUsername(this.state.username); // Set the current user
+                }
+                else{
+                    this.setState({
+                        submitRes: "Invalid Username or Password"
+                    })
+                }
+            },(error) => {
+                console.log(error.response)
+            });
+        }
     }
 
-    handleInputChange = (event) => {
-        event.preventDefault();
-        this.setState({
-            //you can specify multiple inputs here
-            //they just need to have different names 
-            //brackets are used to dynamically update
-            //object key name
-           [event.target.name] : event.target.value
+    // As user enters data check it
+    handleInput(event) {
+        const n = event.target.name; // Get the name of the dom element that triggered the event
+        const v = event.target.value; // Get the value of that object
+        this.setState({  // Set its value to the state
+            [n]: v
+        },
+            () => {this.validate(n,v)} // Validates the input
+        );
+    }
+
+    // Function to validate user input
+    validate(name, value){
+        let errors = this.state.errors;
+        let userValid = this.state.userValid;
+        let passValid = this.state.passValid;
+
+        if(name == "username"){ // It is the username field
+            userValid = value.length > 3;
+            errors.username = userValid ? "" : "Username is too short";
+        }
+        else{ // It is the password field
+            passValid = value.length > 0;
+            errors.password = passValid ? "" : "Password can not be empty";
+        }
+
+        this.setState({ // Updates the errors
+                errors: errors,
+                userValid: userValid,
+                passValid: passValid
         });
     }
 
     render () {
-        const {} = this.state
+        const {errors,submitRes} = this.state
         return (
             <div id="login">
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <p><input type='text' placeholder='Username' name='Username' onChange={this.handleInputChange}/></p>
-                    <p><input type='password' placeholder='Password' name='Password' onChange={this.handleInputChange}/></p>
+                    <label htmlFor='Username'>Username</label>
+                    <p><input type='text' placeholder='username' name='username' onChange={(event) => this.handleInput(event)}/></p>
+                    <p>{errors.username}</p>
+                    <label htmlFor='Password'>Password</label>
+                    <p><input type='password' placeholder='password' name='password' onChange={(event) => this.handleInput(event)}/></p>
+                    <p>{errors.password}</p>
+                    <p>{submitRes}</p>
                     <p><button>Login</button></p>
                 </form>
             </div>
         )
     }
 }
+
 export default Login;
