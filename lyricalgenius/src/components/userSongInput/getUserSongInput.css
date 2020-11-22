@@ -6,8 +6,9 @@ li {
 }
 
 .albumArt{
-    width: 100%;
-    border-radius: 5px;
+    width: 95%;
+    align-self: center;
+    padding-top: 5px;
 }
 
 /*______vvvv______Placeholder until bootstrap card figured out______vvvv______*/
@@ -31,8 +32,8 @@ li {
     padding-top: 3rem;
 }
 
-.audio {
-    background-color: green;
+.not-available {
+    font-size: smaller;
 }
 
 

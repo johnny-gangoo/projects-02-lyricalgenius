@@ -14,7 +14,10 @@ class ListView extends Component {
                             <h5 class="card-songtitle">{this.props.songObj.title}</h5>
                             <p class="card-artistname">{this.props.songObj.name}</p>
                             {this.props.preview[this.props.index] === "" &&
-                                <p>Preview not available for {this.props.songObj.title} </p>
+                                <div>
+                                    <p class="not-available">Preview not available for {this.props.songObj.title} </p>
+                                    <br></br>
+                                </div>
                             }
                             {this.props.preview[this.props.index] !== "" &&
                                 <Audio preview={this.props.preview[this.props.index]} />
