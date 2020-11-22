@@ -4,6 +4,7 @@ import './getUserSongInput.css';
 import DisplayLyrics from './displayLyricsComponent';
 import ListView from './songListComponent';
 
+
 class GetUserInput extends Component {
     constructor(props) {
         super(props)
@@ -91,14 +92,14 @@ class GetUserInput extends Component {
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <p><input type='text' placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} /></p>
                     <p><input type='text' placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} /></p>
-                    <button>Submit</button>
+                    <button class="btn btn-primary">Submit</button>
                 </form>
 
                 {onSubmitClick === true &&
-                    songData.map((songObj, index) => (
+                    songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
                         <li onClick={this.handleListItemOnClick.bind(this, songObj)} key={index}>
                             <div>
-                                <ListView songObj={songObj} preview={this.state.preview} index={index} />
+                                <ListView songObj={songObj} preview={this.state.preview} index={index} /> 
                             </div>
                         </li>
                     ))}

@@ -2,9 +2,38 @@ li {
     list-style: none;
     text-align: left;
     font-size: 16px;
+    display: inline-block;
 }
 
 .albumArt{
-    height: 50px;
-    width: 50px;
+    width: 100%;
+    border-radius: 5px;
 }
+
+/*______vvvv______Placeholder until bootstrap card figured out______vvvv______*/
+.card {
+    /* Add shadows to create the "card" effect */
+    display: inline-block;
+    margin: 5px;
+    border-style: none;
+    background-color: green;
+
+}
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(156, 255, 147, 0.911);
+    transition: 0.2s;
+    background-color: #DDDDDD;
+}
+
+.card-body {
+    color: black;
+    text-align: center;
+    padding-top: 3rem;
+}
+
+.audio {
+    background-color: green;
+}
+
+
+/*____________________________________________________________________________*/
