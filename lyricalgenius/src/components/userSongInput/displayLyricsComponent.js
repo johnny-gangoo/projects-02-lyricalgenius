@@ -30,13 +30,11 @@ class DisplayLyrics extends Component {
     render() {
         return (
             <div>
-                <h3>Select the portions you would like to send then press Done</h3>
-                <h3>Or press send all to send over the entire song</h3>
                 <button onClick={this.sendSections.bind(this)}>Done</button>
                 <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button><br></br>
                 <br></br>
                 {this.props.uniqueLyricData.map((songObj, index) => (
-                    <li onClick={this.selections.bind(this, songObj)}>
+                    <li class="ListItemLyrics" onClick={this.selections.bind(this, songObj)}>
                         {songObj}
                         <br></br>
                         <br></br>

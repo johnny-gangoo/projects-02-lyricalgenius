@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './getUserSongInput.css';
-import DisplayLyrics from './displayLyricsComponent';
 import ListView from './songListComponent';
-
+import LyricsModal from './modal'
 
 class GetUserInput extends Component {
     constructor(props) {
@@ -12,6 +11,7 @@ class GetUserInput extends Component {
             title: "",
             name: "",
             onSubmitClick: true,
+            songObjIndex: 0,
             uniqueLyricData: [],
             allLyricData: [],
             songData: [],
@@ -48,6 +48,8 @@ class GetUserInput extends Component {
     }
 
     handleListItemOnClick = (songObj) => {
+        console.log("HI")
+        this.setState({songObjIndex : this.state.songData.indexOf(songObj)});
         axios.post("http://localhost:3001/getLyrics", songObj).then(res => {
             res = res.data;
             this.setState({ uniqueLyricData: [], allLyricData: [] });
@@ -81,10 +83,9 @@ class GetUserInput extends Component {
         ))
     }
 
-
-
     render() {
-        const { title, name, songData, onSubmitClick } = this.state
+        const { songData, onSubmitClick, songObjIndex } = this.state
+        
 
         return (
             <div>
@@ -97,15 +98,21 @@ class GetUserInput extends Component {
 
                 {onSubmitClick === true &&
                     songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
-                        <li onClick={this.handleListItemOnClick.bind(this, songObj)} key={index}>
-                            <div>
-                                <ListView songObj={songObj} preview={this.state.preview} index={index} /> 
+                        <li key={index}>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="card" onClick={this.handleListItemOnClick.bind(this, songObj)}>
+                                        <ListView songObj={songObj} preview={this.state.preview} index={index} />
+                                    </div>
+                                </div>
                             </div>
                         </li>
                     ))}
 
                 {onSubmitClick === false &&
-                    <DisplayLyrics uniqueLyricData={this.state.uniqueLyricData} allLyricData={this.state.allLyricData} />
+                <div>
+                    <LyricsModal preview={this.state.preview} songObj={songData} songObjIndex={songObjIndex} uniqueLyricData={this.state.uniqueLyricData} allLyricData={this.state.allLyricData}/>
+                </div>
                 }
             </div>
         )

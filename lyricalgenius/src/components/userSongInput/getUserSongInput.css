@@ -2,7 +2,6 @@ li {
     list-style: none;
     text-align: left;
     font-size: 16px;
-    display: inline-block;
 }
 
 .albumArt{
@@ -11,10 +10,28 @@ li {
     padding-top: 5px;
 }
 
+.img-fluid{
+    width:75%;
+}
+
+.albumArtModal{
+    width: 55%;
+    align-self: right;
+
+}
+
+
+.ListItemLyrics:hover{
+    box-shadow: 0 4px 8px 0 rgba(38, 38, 38, 38);
+    transition: 0.2s;
+    background-color: #DCE8EE;
+    transform: scale(1.1);
+}
+
+
 /*______vvvv______Placeholder until bootstrap card figured out______vvvv______*/
 .card {
     /* Add shadows to create the "card" effect */
-    display: inline-block;
     margin: 5px;
     border-style: none;
     background-color: green;
@@ -28,7 +45,6 @@ li {
 
 .card-body {
     color: black;
-    text-align: center;
     padding-top: 3rem;
 }
 
