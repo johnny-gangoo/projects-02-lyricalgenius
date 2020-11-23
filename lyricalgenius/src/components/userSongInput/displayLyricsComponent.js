@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import $ from 'jquery';
 
 class DisplayLyrics extends Component {
     constructor(props) {
@@ -24,8 +24,18 @@ class DisplayLyrics extends Component {
 
     sendAll = (allSections) => {
         //will send to Vlad from here
+        
         console.log(allSections)
     }
+
+    changeColor = () => {
+        $(".ListItemLyrics").on('click',function(){
+            console.log("hasdf")
+            $(this).css("background-color", "#1796cf");
+        });
+    }
+
+   
 
     render() {
         return (

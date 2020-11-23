@@ -10,8 +10,8 @@ class GetUserInput extends Component {
         this.state = {
             title: "",
             name: "",
-            onSubmitClick: true,
-            songObjIndex: 0,
+            launchModal: false,
+            songObjIndex: -1,
             uniqueLyricData: [],
             allLyricData: [],
             songData: [],
@@ -31,7 +31,7 @@ class GetUserInput extends Component {
                     alert("song/artist could not be found");
                     window.location.reload(false);
                 } else {
-                    this.setState({ songData: res, onSubmitClick: true });
+                    this.setState({ songData: res });
                 }
                 this.handleSongPreview(this.state.songData)
             }).catch(error => {
@@ -47,15 +47,14 @@ class GetUserInput extends Component {
         });
     }
 
-    handleListItemOnClick = (songObj) => {
-        console.log("HI")
-        this.setState({songObjIndex : this.state.songData.indexOf(songObj)});
-        axios.post("http://localhost:3001/getLyrics", songObj).then(res => {
+    handleListItemOnClick = async (songObj) => {
+        this.setState({ songObjIndex: this.state.songData.indexOf(songObj) });
+        await axios.post("http://localhost:3001/getLyrics", songObj).then(res => {
             res = res.data;
             this.setState({ uniqueLyricData: [], allLyricData: [] });
-            this.setState({ uniqueLyricData: res.uniqueLyrics, allLyricData: res.originalyrics, onSubmitClick: false });
+            this.setState({ uniqueLyricData: res.uniqueLyrics, allLyricData: res.originalyrics, launchModal: true });
 
-            if (this.state.uniqueLyricData.length <= 1) {
+            if (this.state.uniqueLyricData.length < 1) {
                 alert("Lyrics for this song not found");
                 window.location.reload(false);
             }
@@ -83,9 +82,16 @@ class GetUserInput extends Component {
         ))
     }
 
+    handleCallBack = async() => {
+        console.log("we are here")
+        await this.setState({launchModal: false});
+        this.forceUpdate()
+
+    }
+
     render() {
-        const { songData, onSubmitClick, songObjIndex } = this.state
-        
+        const { songData, launchModal, songObjIndex, preview, uniqueLyricData, allLyricData } = this.state
+
 
         return (
             <div>
@@ -96,24 +102,23 @@ class GetUserInput extends Component {
                     <button class="btn btn-primary">Submit</button>
                 </form>
 
-                {onSubmitClick === true &&
-                    songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
-                        <li key={index}>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="card" onClick={this.handleListItemOnClick.bind(this, songObj)}>
-                                        <ListView songObj={songObj} preview={this.state.preview} index={index} />
+                <div class="row">
+                {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
+                    <li key={index}>
+                            <div class="col-sm-4">
+                                <div class="card" onClick={this.handleListItemOnClick.bind(this, songObj)}>
+                                    <ListView songObj={songObj} preview={preview} index={index} />
+                                    {songObjIndex === index && this.state.launchModal === true &&
+                                    <div>
+                                     <LyricsModal preview={preview} songObj={songData} songObjIndex={songObjIndex} uniqueLyricData={uniqueLyricData} allLyricData={allLyricData} />
                                     </div>
+                                    }
+                                  
                                 </div>
                             </div>
-                        </li>
-                    ))}
-
-                {onSubmitClick === false &&
-                <div>
-                    <LyricsModal preview={this.state.preview} songObj={songData} songObjIndex={songObjIndex} uniqueLyricData={this.state.uniqueLyricData} allLyricData={this.state.allLyricData}/>
+                    </li>
+                ))}
                 </div>
-                }
             </div>
         )
     }
