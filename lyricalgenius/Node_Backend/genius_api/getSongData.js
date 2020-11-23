@@ -26,10 +26,13 @@ let song = async function (songData) {
             return songData;
         }else if(theSongTitle == optionsTitle && theArtist.includes(optionsArtist)){
             return songData;
+        }else if(optionsTitle === "" && theArtist.includes(optionsArtist)){
+            return songData;
         }
     }
     
     var searchResult = await genius.searchSong(options);
+    console.log(searchResult)
     if(searchResult == null || searchResult.length < 0){
         return null;
     }else if(searchResult.length==1){
