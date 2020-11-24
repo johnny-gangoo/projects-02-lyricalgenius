@@ -124,16 +124,16 @@ class GetUserInput extends Component {
                             </li>
                         </ul>
                         <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
+                            <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
 
-                            <input class="form-control mr-sm-2"  placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
+                            <input class="form-control rounded-pill transparent-input mr-sm-2"  placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>
                 </nav>
 
 
-                <div class="row">
+                <div class="row justify-content-center">
                     {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
                         <li key={index}>
                             <div class="col-sm-4">

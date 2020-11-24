@@ -53,3 +53,26 @@ li {
 .not-available {
     font-size: smaller;
 }
+
+input.transparent-input{
+    background-color:transparent !important;
+    border-color: #ffffff;
+    color: #ffffff;
+ }
+ input.transparent-input:focus{
+    border-color:#ffffff;
+    box-shadow: 0 0 0 0.1rem rgb(255, 255, 255);
+    color: #ffffff;
+ }
+
+ /* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px rgba(52, 58, 64, 1) inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
