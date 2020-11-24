@@ -51,9 +51,10 @@ class GetUserInput extends Component {
         this.setState({ songObjIndex: this.state.songData.indexOf(songObj) });
         await axios.post("http://localhost:3001/getLyrics", songObj).then(res => {
             res = res.data;
+
             this.setState({ uniqueLyricData: [], allLyricData: [] });
             this.setState({ uniqueLyricData: res.uniqueLyrics, allLyricData: res.originalyrics, launchModal: true });
-
+            console.log("this is modal " + this.state.launchModal)
             if (this.state.uniqueLyricData.length < 1) {
                 alert("Lyrics for this song not found");
                 window.location.reload(false);
@@ -82,11 +83,9 @@ class GetUserInput extends Component {
         ))
     }
 
-    handleCallBack = async() => {
-        console.log("we are here")
-        await this.setState({launchModal: false});
-        this.forceUpdate()
-
+    handleCallBack = () => {
+        setTimeout(
+            () => this.setState({ launchModal: false }), 1000);
     }
 
     render() {
@@ -95,29 +94,58 @@ class GetUserInput extends Component {
 
         return (
             <div>
-                <h1>Input Form</h1>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <p><input type='text' placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} /></p>
-                    <p><input type='text' placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} /></p>
-                    <button class="btn btn-primary">Submit</button>
-                </form>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+                        <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
+
+                            <input class="form-control mr-sm-2"  placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+
 
                 <div class="row">
-                {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
-                    <li key={index}>
+                    {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
+                        <li key={index}>
                             <div class="col-sm-4">
                                 <div class="card" onClick={this.handleListItemOnClick.bind(this, songObj)}>
                                     <ListView songObj={songObj} preview={preview} index={index} />
-                                    {songObjIndex === index && this.state.launchModal === true &&
-                                    <div>
-                                     <LyricsModal preview={preview} songObj={songData} songObjIndex={songObjIndex} uniqueLyricData={uniqueLyricData} allLyricData={allLyricData} />
-                                    </div>
-                                    }
-                                  
                                 </div>
                             </div>
-                    </li>
-                ))}
+                        </li>
+                    ))}
+                    {launchModal === true &&
+                        <LyricsModal handleCallBack={this.handleCallBack} preview={preview} songObj={songData} songObjIndex={songObjIndex} uniqueLyricData={uniqueLyricData} allLyricData={allLyricData} />
+                    }
                 </div>
             </div>
         )

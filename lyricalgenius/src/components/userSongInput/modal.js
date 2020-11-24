@@ -14,7 +14,13 @@ function LyricsModal(props) {
                 showModal={() => setLgShow(true)}
                 size="lg"
                 show={lgShow}
-                onHide={() => setLgShow(false)}
+                onHide={() => 
+                    { 
+                        props.handleCallBack();
+                        setLgShow(false); 
+                        console.log("hide");
+                      
+                    }}
                 aria-labelledby="example-modal-sizes-title-lg"
             >
                 <Modal.Header>
@@ -39,7 +45,7 @@ function LyricsModal(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <DisplayLyrics uniqueLyricData={props.uniqueLyricData} allLyricData={props.allLyricData} />
+                    <DisplayLyrics handleCallBack={props.handleCallBack.bind(this)} uniqueLyricData={props.uniqueLyricData} allLyricData={props.allLyricData} />
                 </Modal.Body>
             </Modal>
         </>
