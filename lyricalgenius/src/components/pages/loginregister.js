@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import Login from './login.js';
 import Register from './register.js';
+import '../../login.css';
 
 // Component that will hold the login and register components
 class LoginRegisterPage extends Component {
@@ -34,10 +35,11 @@ class LoginRegisterPage extends Component {
     render () {
         const {toggleText} = this.state
         return (
-            <div id="register">
+            <div id="main" align="center">
+                
                 {this.state.loginVisable && <Login />}
                 {!this.state.loginVisable && <Register />}
-                <span onClick={this.handleToggle}>{toggleText}</span>
+                <span className="toggle-span" onClick={this.handleToggle}>{toggleText}</span>
             </div>
         )
     }
