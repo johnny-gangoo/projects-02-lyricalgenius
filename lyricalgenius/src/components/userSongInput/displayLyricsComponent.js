@@ -33,8 +33,6 @@ class DisplayLyrics extends Component {
 
     }
 
-
-
     render() {
         return (
             <div>
