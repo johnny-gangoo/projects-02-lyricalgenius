@@ -30,20 +30,10 @@ class DisplayLyrics extends Component {
         console.log(allSections)
     }
 
-    changeColor = (songObj) => {
-            console.log($(songObj).css("background-color"))
-            if ($(songObj).css("background-color") === "rgb(51, 51, 51)") {
-                console.log("hello")
-                $(songObj).css("background-color", "#1796cf");
-            } else {
-
-                $(songObj).css("background-color", "#333333");
-            }
-        
+    changeColor = () => {
+            console.log("hi");
 
     }
-
-
 
     render() {
         return (
@@ -56,7 +46,9 @@ class DisplayLyrics extends Component {
                     <li class="ListItemLyrics" onClick={() => {
                         if ($("li.ListItemLyrics").eq(index).css("background-color") === "rgb(51, 51, 51)") {
                         $("li.ListItemLyrics").eq(index).css("background-color", "#1796cf");
+                        this.changeColor();
                     } else {
+                        this.changeColor();
                         $("li.ListItemLyrics").eq(index).css("background-color", "#EBF2FF");
                     }}}   
                     >
