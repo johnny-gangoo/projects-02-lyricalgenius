@@ -1,3 +1,4 @@
+/*----------Multi Song Response List View ---*/
 li {
     list-style: none;
     text-align: left;
@@ -5,23 +6,23 @@ li {
     display: inline-block;
 }
 
+/*-------------Album Art-------------*/
 .albumArt{
     width: 95%;
     align-self: center;
     padding-top: 5px;
 }
 
+.albumArtModal{
+    width: 55%;
+    align-self: right;
+}
+
 .img-fluid{
     width:75%;
 }
 
-.albumArtModal{
-    width: 55%;
-    align-self: right;
-
-}
-
-
+/*-------------Modal-------------*/
 .ListItemLyrics:hover{
     box-shadow: 0 4px 8px 0 rgba(38, 38, 38, 38);
     transition: 0.2s;
@@ -30,17 +31,15 @@ li {
 }
 
 
-/*______vvvv______Placeholder until bootstrap card figured out______vvvv______*/
+/*--------Multi Song Response Cards------------*/
 .card {
-    /* Add shadows to create the "card" effect */
     margin: 5px;
     border-style: none;
-    background-color: green;
+    background-color: #000;
     display: inline-block;
-
 }
 .card:hover {
-    box-shadow: 0 4px 8px 0 rgba(156, 255, 147, 0.911);
+    box-shadow: 0 4px 8px 0 rgba(14, 17, 14, 0.911);
     transition: 0.2s;
     background-color: #DDDDDD;
 }
@@ -48,6 +47,7 @@ li {
 .card-body {
     color: black;
     padding-top: 3rem;
+    
 }
 
 .not-available {
@@ -55,4 +55,25 @@ li {
 }
 
 
-/*____________________________________________________________________________*/
+input.transparent-input{
+    background-color:transparent !important;
+    border-color: #ffffff;
+    color: #ffffff;
+ }
+ input.transparent-input:focus{
+    border-color:#ffffff;
+    box-shadow: 0 0 0 0.1rem rgb(255, 255, 255);
+    color: #ffffff;
+ }
+
+ /* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px rgba(52, 58, 64, 1) inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
