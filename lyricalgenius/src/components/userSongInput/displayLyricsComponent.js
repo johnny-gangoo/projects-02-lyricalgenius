@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import favorite from '../functions/favorite.js';
+import emptyheart from '../../images/icons/empty-heart.png';
 
 class DisplayLyrics extends Component {
     constructor(props) {
@@ -48,6 +50,7 @@ class DisplayLyrics extends Component {
             <div>
                 <button onClick={this.sendSections.bind(this)}>Done</button>
                 <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button><br></br>
+                <img class="img-fluid" style={{"height": "10%","width": "10%"}} src={emptyheart} onClick={() => favorite(this.props)}></img>
                 <br></br>
                 {this.props.uniqueLyricData.map((songObj, index) => (
                     <li class="ListItemLyrics" onClick={() => {

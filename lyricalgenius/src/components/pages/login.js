@@ -5,6 +5,7 @@ import Account from './user.js';
 import axios from 'axios';
 import '../../login.css';
 
+
 // Login Component
 class Login extends Component {
     constructor(props){
@@ -34,6 +35,7 @@ class Login extends Component {
             axios.post("http://localhost:3001/login", this.state).then((response) => {
                 if(response.data == "Successful Login"){
                     Account.setUsername(this.state.username); // Set the current user
+                    window.location.href = window.location.href + "home";
                 }
                 else{
                     this.setState({

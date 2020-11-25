@@ -4,9 +4,9 @@ import DisplayLyrics from './displayLyricsComponent';
 import { Modal } from 'react-bootstrap';
 import Audio from './audioComponent';
 
+
 function LyricsModal(props) {
     const [lgShow, setLgShow] = useState(true);
-
 
     return (
         <>
@@ -41,11 +41,13 @@ function LyricsModal(props) {
                                 <img class="img-fluid" src={props.songObj[props.songObjIndex].albumArt} alt="" ></img>
                             </div>
 
+                            
+
                         </div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <DisplayLyrics handleCallBack={props.handleCallBack.bind(this)} uniqueLyricData={props.uniqueLyricData} allLyricData={props.allLyricData} />
+                    <DisplayLyrics handleCallBack={props.handleCallBack.bind(this)} songData={props.songObj[props.songObjIndex]} uniqueLyricData={props.uniqueLyricData} allLyricData={props.allLyricData} />
                 </Modal.Body>
             </Modal>
         </>

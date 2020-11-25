@@ -101,4 +101,23 @@ app.post('/login', async (request, response) =>{
     
 });
 
+app.post('/favorite', async(request,response) => {
+
+    db.connect(err => {
+        const collection = db.db("lyricalgeniusdb1").collection("c1");
+        // perform actions on the collection object
+        // first make sure user does not already exist
+        collection.updateOne({username: "test100"}, {$set: {favoritesong: "testfavorite2"}})
+            .then(result => {
+                if(result) {
+                    response.send("Favorited");
+                } else {
+                    response.send("Issue");
+                }
+            })
+            .catch(err => console.error(`Failed to find document: ${err}`));
+    })
+
+});
+
 app.listen(port, () => console.log("Hello from the backend server"));

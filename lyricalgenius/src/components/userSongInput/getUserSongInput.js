@@ -3,6 +3,8 @@ import axios from 'axios';
 import './getUserSongInput.css';
 import ListView from './songListComponent';
 import LyricsModal from './modal'
+import Account from '../pages/user.js';
+
 
 class GetUserInput extends Component {
     constructor(props) {
@@ -90,7 +92,6 @@ class GetUserInput extends Component {
 
     render() {
         const { songData, launchModal, songObjIndex, preview, uniqueLyricData, allLyricData } = this.state
-
 
         return (
             <div>
