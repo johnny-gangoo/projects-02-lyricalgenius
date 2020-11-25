@@ -132,12 +132,12 @@ class GetUserInput extends Component {
                     </div>
                 </nav>
 
-
+            
                 <div class="row justify-content-center">
                     {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
                         <li key={index}>
                             <div class="col-sm-4">
-                                <div class="card" onClick={this.handleListItemOnClick.bind(this, songObj)}>
+                                <div class="card text-center" onClick={this.handleListItemOnClick.bind(this, songObj)}>
                                     <ListView songObj={songObj} preview={preview} index={index} />
                                 </div>
                             </div>

@@ -24,18 +24,24 @@ class DisplayLyrics extends Component {
 
     sendAll = (allSections) => {
         //will send to Vlad from here
-        
+
         console.log(allSections)
     }
 
-    changeColor = () => {
-        $(".ListItemLyrics").on('click',function(){
-            console.log("hasdf")
-            $(this).css("background-color", "#1796cf");
-        });
+    changeColor = (songObj) => {
+            console.log($(songObj).css("background-color"))
+            if ($(songObj).css("background-color") === "rgb(51, 51, 51)") {
+                console.log("hello")
+                $(songObj).css("background-color", "#1796cf");
+            } else {
+
+                $(songObj).css("background-color", "#333333");
+            }
+        
+
     }
 
-   
+
 
     render() {
         return (
@@ -44,13 +50,19 @@ class DisplayLyrics extends Component {
                 <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button><br></br>
                 <br></br>
                 {this.props.uniqueLyricData.map((songObj, index) => (
-                    <li class="ListItemLyrics" onClick={this.selections.bind(this, songObj)}>
+                    <li class="ListItemLyrics" onClick={() => {
+                        if ($("li.ListItemLyrics").eq(index).css("background-color") === "rgb(51, 51, 51)") {
+                        $("li.ListItemLyrics").eq(index).css("background-color", "#1796cf");
+                    } else {
+                        $("li.ListItemLyrics").eq(index).css("background-color", "#EBF2FF");
+                    }}}   
+                    >
                         {songObj}
                         <br></br>
                         <br></br>
                     </li>
                 ))}
-            
+
             </div>
         )
     }

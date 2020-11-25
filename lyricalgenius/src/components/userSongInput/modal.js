@@ -25,7 +25,7 @@ function LyricsModal(props) {
             >
                 <Modal.Header>
                     <Modal.Title id="example-modal-sizes-title-lg">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <div class="col-md-8">
                                 <h3>Select the sections you want to send:</h3>
                                 <h5>Artist: {props.songObj[props.songObjIndex].name}</h5>
