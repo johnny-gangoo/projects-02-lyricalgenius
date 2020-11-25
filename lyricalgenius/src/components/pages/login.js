@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import Account from './user.js';
 import axios from 'axios';
+import '../../login.css';
 
 // Login Component
 class Login extends Component {
@@ -81,17 +82,17 @@ class Login extends Component {
     render () {
         const {errors,submitRes} = this.state
         return (
-            <div id="login">
+            <div id="login" className="container-fluid" align="center" style={{'paddingTop': '20px','color': 'white'}}>
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor='Username'>Username</label>
-                    <p><input type='text' placeholder='username' name='username' onChange={(event) => this.handleInput(event)}/></p>
-                    <p>{errors.username}</p>
+                    <p><input className="form-field" type='text' name='username' onChange={(event) => this.handleInput(event)}/></p>
+                    <span className="error-message">{errors.username}</span>
                     <label htmlFor='Password'>Password</label>
-                    <p><input type='password' placeholder='password' name='password' onChange={(event) => this.handleInput(event)}/></p>
-                    <p>{errors.password}</p>
-                    <p>{submitRes}</p>
-                    <p><button>Login</button></p>
+                    <p><input className="form-field" type='password' name='password' onChange={(event) => this.handleInput(event)}/></p>
+                    <span className="error-message">{errors.password}</span>
+                    <span>{submitRes}</span>
+                    <p><button id='submit-button'>Login</button></p>
                 </form>
             </div>
         )

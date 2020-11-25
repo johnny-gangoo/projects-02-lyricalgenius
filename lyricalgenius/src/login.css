@@ -1,0 +1,59 @@
+.form-field{
+    width: 80%;
+    border-radius: 40px;
+    position: relative;
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding-left:20px;
+}
+
+#background{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#register{
+    position: relative;
+    padding-top: 100px;
+}
+
+#main{
+    position: relative;
+    background: rgba(85, 84, 84, 0.8);
+    width: 30%;
+    float: right;
+    height: 100vh;
+}
+
+#logo-img{
+    padding-right: 100px;
+    margin: 0 auto;
+    padding-top: 200px;
+    width: 70%;
+}
+
+label{
+    color: white;
+    font-size: 20px;
+}
+
+.error-message{
+    color: red;
+}
+
+.toggle-span{
+    color: white;
+}
+
+#submit-button{
+    width: 120px;
+    margin-top: 10px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 20px;
+    background: transparent;
+}

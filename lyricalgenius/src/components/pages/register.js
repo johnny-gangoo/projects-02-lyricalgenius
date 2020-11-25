@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Account from './user.js';
 import axios from 'axios';
+import '../../login.css';
 
 class Register extends Component {
     constructor(props){
@@ -111,52 +112,52 @@ class Register extends Component {
     render () {
         const {errors,submitRes} = this.state
         return (
-            <div id="register">
-                <h1>Register</h1>
+            <div id="register" className="container-fluid" align="center" style={{'paddingTop': '20px','color': 'white'}}>
+                
+                <h1 style={{'paddingTop': '20px'}}>Register</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>Username</label>
                     <br/>
-                    <input type='text' placeholder='username' name='username' onChange={(event) => this.handleInput(event)}/>
+                    <input className='form-field' type='text' name='username' onChange={(event) => this.handleInput(event)}/>
                     <br/>
-                    <span>{errors.username}</span>
+                    <span className='error-message'>{errors.username}</span>
                     <br/>
                     <label>Email</label>
                     <br/>
-                    <input type='email' placeholder='email' name='email' onChange={(event) => this.handleInput(event)}/>
+                    <input className='form-field' type='email' name='email' onChange={(event) => this.handleInput(event)}/>
                     <br/>
-                    <span>{errors.email}</span>
+                    <span className='error-message'>{errors.email}</span>
                     <br/>
                     <label>First Name</label>
                     <br/>
-                    <input type='text' placeholder='fname' name='fname' onChange={(event) => this.handleInput(event)}/>
+                    <input className='form-field' type='text' name='fname' onChange={(event) => this.handleInput(event)}/>
                     <br/>
-                    <span>{errors.fname}</span>
+                    <span className='error-message'>{errors.fname}</span>
                     <br/>
                     <label>Last Name</label>
                     <br/>
-                    <input type='text' placeholder='lname' name='lname' onChange={(event) => this.handleInput(event)}/>
+                    <input className='form-field' type='text' name='lname' onChange={(event) => this.handleInput(event)}/>
                     <br/>
-                    <span>{errors.lname}</span>
+                    <span className='error-message'>{errors.lname}</span>
                     <br/>
                     <label>Phone Number</label>
                     <br/>
-                    <input type='text' placeholder='pnumber' name='pnumber' onChange={(event) => this.handleInput(event)}/>
+                    <input className='form-field' type='text' name='pnumber' onChange={(event) => this.handleInput(event)}/>
                     <br/>
-                    <span>{errors.pnumber}</span>
+                    <span className='error-message'>{errors.pnumber}</span>
                     <br/>
                     <label>Password</label>
                     <br/>
-                    <input type='password' placeholder='password' name='password' onChange={(event) => this.handleInput(event)}/>
+                    <input className='form-field' type='password' name='password' onChange={(event) => this.handleInput(event)}/>
                     <br/>
-                    <span>{errors.password}</span>
+                    <span className='error-message'>{errors.password}</span>
                     <br/>
                     <label>Confirm Password</label>
                     <br/>
-                    <input type='password' placeholder='password2' name='password2' onChange={(event) => this.handleInput(event)}/>
+                    <input className='form-field' type='password' name='password2' onChange={(event) => this.handleInput(event)}/>
                     <br/>
-                    <span>{errors.password2}</span>
-                    <span>{submitRes}</span>
-                    <p><button onClick={this.handleValidation}>Register</button></p>
+                    <span className='error-message'>{errors.password2}</span>
+                    <p><button id='submit-button' onClick={this.handleValidation}>Register</button></p>
                 </form>
             </div>
         )
