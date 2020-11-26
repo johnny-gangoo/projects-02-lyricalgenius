@@ -13,14 +13,19 @@ module.exports = function (songData) {
      {
         lyrics[i] = lyrics[i].replace(/(\r\n|\n|\r|`)/gm, " ");
      }
+     console.log(filteredLyrics);
      for(var j = 0; j < filteredLyrics.length; j++)
      {
         filteredLyrics[j] = filteredLyrics[j].replace(/(\r\n|\n|\r|`)/gm, " ");
+        if(filteredLyrics[j].charAt(filteredLyrics[j].length - 1) == "]")
+        {
+            filteredLyrics.splice(j);
+        }
      }
-     if((filteredLyrics.length == 1) && (filteredLyrics[0].charAt(filteredLyrics[0].length - 1) == "]"))
-     {
-        filteredLyrics.pop();
-     }
+    //  if((filteredLyrics[0].charAt(filteredLyrics[0].length - 1) == "]"))
+    //  {
+    //     filteredLyrics.pop();
+    //  }
     console.log(filteredLyrics); //UNCOMMENT TO VIEW LYRICS IN CONSOLE
     return {
         uniqueLyrics: filteredLyrics,
