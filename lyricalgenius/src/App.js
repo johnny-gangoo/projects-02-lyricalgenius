@@ -7,6 +7,8 @@ import Navbar from './components/userSongInput/navbar';
 import './login.css';
 import React, {Component} from 'react';
 import Error from './components/pages/404.js';
+import Chart from './components/userSongInput/charts.js';
+import Favorite from './components/userSongInput/favoritedSongs.js';
 
 
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
@@ -18,7 +20,10 @@ class App extends Component{
         <Switch>
         <Route exact path="/" component={Signin}/>
         <Route exact path="/home" component={GetUserInput}/>
+        <Route exact path="/chart" component={Chart}/>
+        <Route exact path="/favorite" component={Favorite}/>
         <Route component={Error}/>
+
         </Switch>
       </Router>
     )
