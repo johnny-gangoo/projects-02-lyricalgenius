@@ -87,7 +87,7 @@ class DisplayLyrics extends Component {
                                 {this.resetState()}
                             </li>
                         }}>Clear Selections</button>
-                        <img class="img-fluid" align="right" style={{ "height": "75%", "width": "5.3%" }} src={emptyheart} onClick={() => favorite(this.props)}></img>
+                        <LikeButton song={this.props}/>
                         <br></br>
                         <br></br>
 
@@ -120,7 +120,7 @@ class DisplayLyrics extends Component {
                                 {this.resetState()}
                             </li>
                         }}>Clear Selections</button>
-                        <img class="img-fluid" align="right" style={{ "height": "55%", "width": "5%" }} src={emptyheart} onClick={() => favorite(this.props)}></img>
+                        <LikeButton song={this.props}/>
                         <br></br>
                         <br></br>
             </div>

@@ -28,7 +28,7 @@ class likeButton extends Component{
     render () {
         const color = this.state.liked ? "red" : "";
         return (
-                <img className="img-fluid" style={{"height": "5%","width": "5%","background": color}} src={emptyheart} onClick={() => {favorite(this.props.song); this.toggleLike()}}></img>
+                <img className="img-fluid" align="right" style={{"height": "75%","width": "5.3%","background": color}} src={emptyheart} onClick={() => {favorite(this.props.song); this.toggleLike()}}></img>
         )
     }
 }
