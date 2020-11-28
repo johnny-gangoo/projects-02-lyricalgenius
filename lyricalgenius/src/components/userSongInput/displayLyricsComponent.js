@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import favorite from '../functions/favorite.js';
-import emptyheart from '../../images/icons/empty-heart.png';
+import axios from 'axios';
+import LikeButton from './likeButton.js';
 
 class DisplayLyrics extends Component {
     constructor(props) {
@@ -38,9 +38,11 @@ class DisplayLyrics extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.sendSections.bind(this)}>Done</button>
-                <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button><br></br>
-                <img class="img-fluid" style={{"height": "10%","width": "10%"}} src={emptyheart} onClick={() => favorite(this.props)}></img>
+                <div className="row">
+                    <button onClick={this.sendSections.bind(this)}>Done</button>
+                    <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button><br></br>
+                    <LikeButton song={this.props}/>
+                </div>
                 <br></br>
                 {this.props.uniqueLyricData.map((songObj, index) => (
                     <li class="ListItemLyrics" onClick={() => {

@@ -1,17 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-function isFavorited (){
-    axios.post("http://localhost:3001/favorite", {"username": "test100"}).then((response) => {
-        if(response.data == "Favorited"){
-            console.log("it worked");
-        }
-        else{
-
-        }
-    },(error) => {
-        console.log(error.response)
-    });
+function isFavorited (items){
+    console.log(items.songData);
+    
 }
 
 export default isFavorited;

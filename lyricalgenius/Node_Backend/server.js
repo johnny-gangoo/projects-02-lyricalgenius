@@ -195,4 +195,27 @@ app.post('/getFavorites', async(request,response) => {
     }
 });
 
+app.post('/checkIsFavorited', async(request,response) =>{
+    console.log(request.body);
+    const MongoClient = require('mongodb').MongoClient; // Establish Client
+    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
+    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    retVal = false;
+    try{
+        await client.connect(); // Connect to db
+        const database = client.db('lyricalgeniusdb1'); // Select db
+        const collection = database.collection('c1'); // Select cluster
+        const result = await collection.findOne({'favoritesongs': { "$in": [request.body.song]}}); // Query
+        if(result == null){
+            retVal = false;
+        }
+        else{
+            retVal = true;
+        }
+    } finally {
+        await client.close();
+        response.send(retVal);
+    }
+});
+
 app.listen(port, () => console.log("Hello from the backend server"));

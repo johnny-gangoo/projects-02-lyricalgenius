@@ -2,14 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 function favorite (items){
-    console.log(items);
-    axios.post("http://localhost:3001/favorite", {"username": "test100"}).then((response) => {
-        if(response.data == "Favorited"){
-            console.log("it worked");
-        }
-        else{
-
-        }
+    axios.post("http://localhost:3001/favorite", {username: "test100", song: items.songData}).then((response) => {
     },(error) => {
         console.log(error.response)
     });
