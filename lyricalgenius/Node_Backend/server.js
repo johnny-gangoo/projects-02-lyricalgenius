@@ -162,12 +162,36 @@ app.post('/favorite', async(request,response) => {
     const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
     const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
     try{
+        console.log(request.body.song);
         await client.connect(); // Connect to db
         const database = client.db('lyricalgeniusdb1'); // Select db
         const collection = database.collection('c1'); // Select cluster
-        const result = await collection.updateOne({username: "test100"}, {$addToSet: {favoritesongs: request.body.song}}); // Query
+        const result = await collection.findOne({'favoritesongs': { "$in": [request.body.song]}}); // Query
+        if(result == null){
+            const add = await collection.updateOne({"username": request.body.username}, {$addToSet: {favoritesongs: request.body.song} });
+        }
+        else{
+            const minus = await collection.updateOne({"username": request.body.username}, {$pull: {favoritesongs: request.body.song} });
+        }
     } finally {
         await client.close();
+    }
+});
+
+app.post('/getFavorites', async(request,response) => {
+    const MongoClient = require('mongodb').MongoClient; // Establish Client
+    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
+    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    let retVal = "";
+    try{
+        await client.connect(); // Connect to db
+        const database = client.db('lyricalgeniusdb1'); // Select db
+        const collection = database.collection('c1'); // Select cluster
+        const result = await collection.findOne({username: "test100"}); // Query
+        retVal = result.favoritesongs;
+    } finally {
+        await client.close();
+        response.send(retVal);
     }
 });
 
