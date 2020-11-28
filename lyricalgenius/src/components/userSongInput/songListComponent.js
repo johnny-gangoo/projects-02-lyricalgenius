@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Audio from './audioComponent';
-import favorite from '../functions/favorite.js';
-import emptyheart from '../../images/icons/empty-heart.png';
+
 
 class ListView extends Component {
+
 
     render() {
         return (
             <div>
                 <div class="card-body">
-                <img class="albumArt" src={this.props.songObj.albumArt} alt=""></img>
+                    <img class="albumArt" src={this.props.songObj.albumArt} alt=""></img>
                     <h5 class="card-songtitle">{this.props.songObj.title}</h5>
                     <p class="card-artistname">{this.props.songObj.name}</p>
                     {this.props.preview[this.props.index] === "" &&

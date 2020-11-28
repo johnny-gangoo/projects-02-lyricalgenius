@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import axios from 'axios';
 import LikeButton from './likeButton.js';
+import favorite from '../functions/favorite.js';
+import emptyheart from '../../images/icons/empty-heart.png';
+import ModalForUserInput from '../userSongInput/modalForRecepiant'
+
 
 class DisplayLyrics extends Component {
     constructor(props) {
@@ -19,6 +23,7 @@ class DisplayLyrics extends Component {
     }
 
     sendAll = (allSections) => {
+        
         //will send to Vlad from here
         console.log(allSections)
     }
@@ -77,7 +82,8 @@ class DisplayLyrics extends Component {
             <div>
                 <div class="row">
                     <div class="col-12">
-                        <button onClick={this.sendSections.bind(this)}>Done</button>
+                        <div>
+                        <ModalForUserInput LyricsArray={this.state.sections} />
                         <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button>
                         <button onClick={() => {
                             <li class="ListItemLyrics">
@@ -87,6 +93,7 @@ class DisplayLyrics extends Component {
                                 {this.resetState()}
                             </li>
                         }}>Clear Selections</button>
+                        </div>
                         <LikeButton song={this.props}/>
                         <br></br>
                         <br></br>
