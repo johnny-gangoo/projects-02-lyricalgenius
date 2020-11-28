@@ -3,7 +3,7 @@ import axios from 'axios';
 import './getUserSongInput.css';
 import ListView from './songListComponent';
 import LyricsModal from './modal'
-import Account from '../pages/user.js';
+import { toast } from 'react-toastify';
 
 
 class GetUserInput extends Component {
@@ -29,9 +29,7 @@ class GetUserInput extends Component {
             axios.post("http://localhost:3001/getSong", this.state).then(res => {
                 res = res.data;
                 if (res.length === 0) {
-                    this.setState = this.initialState;
-                    alert("song/artist could not be found");
-                    window.location.reload(false);
+                    this.notifyForSongAndArtist();
                 } else {
                     this.setState({ songData: res });
                 }
@@ -56,10 +54,10 @@ class GetUserInput extends Component {
 
             this.setState({ uniqueLyricData: [], allLyricData: [] });
             this.setState({ uniqueLyricData: res.uniqueLyrics, allLyricData: res.originalyrics, launchModal: true });
-            console.log("this is modal " + this.state.launchModal)
             if (this.state.uniqueLyricData.length < 1) {
-                alert("Lyrics for this song not found");
-                window.location.reload(false);
+                this.notifyForMissingLyrics()
+            } else {
+                this.pauseOtherAudioPreviews(this);
             }
         })
             .catch(error => {
@@ -88,6 +86,26 @@ class GetUserInput extends Component {
     handleCallBack = () => {
         setTimeout(
             () => this.setState({ launchModal: false }), 1000);
+    }
+
+    pauseOtherAudioPreviews = (event) => {
+        for (const audio of document.querySelectorAll('audio')) {
+            if (audio !== event.currentTarget) {
+                audio.pause();
+            }
+        }
+    }
+
+    notifyForSongAndArtist = async () => {
+        await toast('Song/Artist could not be found...' + '\n' + 'please try again', { position: toast.POSITION.TOP_CENTER, autoClose: 2500 })
+        setTimeout(() => window.location.reload(false), 2500);
+    }
+
+    notifyForMissingLyrics = async () => {
+        await toast.warning('Lyrics for this song could not be found...' + '\n' + 'please try again', { position: toast.POSITION.TOP_CENTER, autoClose: 2500 })
+        this.setState({ launchModal: false });
+        setTimeout(() => window.location.reload(false), 2500);
+
     }
 
     render() {
@@ -127,13 +145,12 @@ class GetUserInput extends Component {
                         <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0">
                             <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
 
-                            <input class="form-control rounded-pill transparent-input mr-sm-2"  placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
+                            <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>
                 </nav>
 
-            
                 <div class="row justify-content-center">
                     {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
                         <li key={index}>
