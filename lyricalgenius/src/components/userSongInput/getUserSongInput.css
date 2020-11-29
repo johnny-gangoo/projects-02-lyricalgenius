@@ -26,7 +26,7 @@ li {
 
 
 /*--------Multi Song Response Cards------------*/
-/* Using ID's allows for a higher priority over the typical bootstrap */
+/* Using ID's allows for a higher priority over the typical bootstrap.*/
 .card {
     margin: 5px;
     border-style: none;
