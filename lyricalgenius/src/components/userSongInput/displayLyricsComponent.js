@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import LikeButton from './likeButton.js';
 import ModalForUserInput from './modalForRecipient'
+import { toast } from 'react-toastify';
+
 
 class DisplayLyrics extends Component {
     constructor(props) {
@@ -13,10 +15,16 @@ class DisplayLyrics extends Component {
         }
     }
 
+    notifyForNonClickedSelection = async () => {
+        await toast.warning('Please select an option below...', { position: toast.POSITION.TOP_CENTER, autoClose: 1500 })
+      }
+
     sendSections = async () => {
         // //will send to Vlad from here
         if (this.state.sections.length !== 0) {
             await this.setState({ isSectionsArrayEmpty: false })
+        }else{
+            this.notifyForNonClickedSelection();
         }
         console.log(this.state.sections);
     }

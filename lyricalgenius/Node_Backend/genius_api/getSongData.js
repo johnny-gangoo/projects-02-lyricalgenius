@@ -32,7 +32,7 @@ let song = async function (songData) {
     }
     
     var searchResult = await genius.searchSong(options);
-    console.log(searchResult)
+    //console.log(searchResult)
     if(searchResult == null || searchResult.length < 0){
         return null;
     }else if(searchResult.length==1){

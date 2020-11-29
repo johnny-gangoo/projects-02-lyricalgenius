@@ -13,7 +13,6 @@ module.exports = function (songData) {
      {
         lyrics[i] = lyrics[i].replace(/(\r\n|\n|\r|`)/gm, " ");
      }
-     console.log(filteredLyrics);
      for(var j = 0; j < filteredLyrics.length; j++)
      {
         filteredLyrics[j] = filteredLyrics[j].replace(/(\r\n|\n|\r|`)/gm, " ");
@@ -22,11 +21,8 @@ module.exports = function (songData) {
             filteredLyrics.splice(j);
         }
      }
-    //  if((filteredLyrics[0].charAt(filteredLyrics[0].length - 1) == "]"))
-    //  {
-    //     filteredLyrics.pop();
-    //  }
-    console.log(filteredLyrics); //UNCOMMENT TO VIEW LYRICS IN CONSOLE
+
+    //console.log(filteredLyrics); //UNCOMMENT TO VIEW LYRICS IN CONSOLE
     return {
         uniqueLyrics: filteredLyrics,
         originalyrics: lyrics
