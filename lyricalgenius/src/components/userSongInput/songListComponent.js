@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Audio from './audioComponent';
-import favorite from '../functions/favorite.js';
-import emptyheart from '../../images/icons/empty-heart.png';
 
 class ListView extends Component {
 

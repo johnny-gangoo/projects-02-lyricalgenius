@@ -22,7 +22,8 @@ class Register extends Component {
             pnumberValid: false,
             passwordValid: false,
             password2Valid: false,
-            submitRes: ''
+            submitRes: '',
+            successMessage: ''
         }
     }
 
@@ -31,12 +32,13 @@ class Register extends Component {
         event.preventDefault();
         //axios post will send the data to the backend in JSON format
         axios.post("http://localhost:3001/createAccount", this.state).then(response => {
-            if(response.data == "Account created"){
-                Account.setUsername(this.state.username); // Set the current user
+            if(response.data != "User already exists."){
+                this.setState({successMessage: "Account succesfully created!"});
             }
             else{
                 this.setState({
-                    submitRes: "Username already exists"
+                    submitRes: "Username already exists",
+                    successMessage: ""
                 })
             }
         })
@@ -110,11 +112,13 @@ class Register extends Component {
     }
 
     render () {
-        const {errors,submitRes} = this.state
+        const {errors,submitRes,successMessage} = this.state
         return (
             <div id="register" className="container-fluid" align="center" style={{'paddingTop': '20px','color': 'white'}}>
                 
                 <h1 style={{'paddingTop': '20px'}}>Register</h1>
+                <span style={{"color": "green"}}>{successMessage}</span>
+                <br/>
                 <form onSubmit={this.handleSubmit}>
                     <label>Username</label>
                     <br/>
@@ -157,6 +161,8 @@ class Register extends Component {
                     <input className='form-field' type='password' name='password2' onChange={(event) => this.handleInput(event)}/>
                     <br/>
                     <span className='error-message'>{errors.password2}</span>
+                    <br/>
+                    <span style={{"color": "red"}}>{submitRes}</span>
                     <p><button id='submit-button' onClick={this.handleValidation}>Register</button></p>
                 </form>
             </div>

@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import Account from './user.js';
 import axios from 'axios';
 import '../../login.css';
+import { getFromStorage, setInStorage} from '../functions/store.js';
 
 
 // Login Component
@@ -33,8 +34,9 @@ class Login extends Component {
         // Only allow submit if the form is filled correctly
         if(this.state.userValid && this.state.passValid){
             axios.post("http://localhost:3001/login", this.state).then((response) => {
-                if(response.data == "Successful Login"){
-                    Account.setUsername(this.state.username); // Set the current user
+                if(response.data != "Incorrect Password"){
+                    // Set the current user
+                    setInStorage("lgut",{token: response.data});
                     window.location.href = window.location.href + "home";
                 }
                 else{
@@ -66,8 +68,8 @@ class Login extends Component {
         let passValid = this.state.passValid;
 
         if(name == "username"){ // It is the username field
-            userValid = value.length > 3;
-            errors.username = userValid ? "" : "Username is too short";
+            userValid = value.length > 0;
+            errors.username = userValid ? "" : "Username can not be empty";
         }
         else{ // It is the password field
             passValid = value.length > 0;
@@ -88,12 +90,18 @@ class Login extends Component {
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor='Username'>Username</label>
-                    <p><input className="form-field" type='text' name='username' onChange={(event) => this.handleInput(event)}/></p>
+                    <br/>
+                    <input className="form-field" type='text' name='username' onChange={(event) => this.handleInput(event)}/>
+                    <br/>
                     <span className="error-message">{errors.username}</span>
+                    <br/>
                     <label htmlFor='Password'>Password</label>
-                    <p><input className="form-field" type='password' name='password' onChange={(event) => this.handleInput(event)}/></p>
+                    <br/>
+                    <input className="form-field" type='password' name='password' onChange={(event) => this.handleInput(event)}/>
+                    <br/>
                     <span className="error-message">{errors.password}</span>
-                    <span>{submitRes}</span>
+                    <br/>
+                    <span style={{"color": "red"}}>{submitRes}</span>
                     <p><button id='submit-button'>Login</button></p>
                 </form>
             </div>

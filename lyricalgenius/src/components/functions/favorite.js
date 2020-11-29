@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 function favorite (items){
-    axios.post("http://localhost:3001/favorite", {username: "test100", song: items.songData}).then((response) => {
+    axios.post("http://localhost:3001/favorite", {token: items.token.token, song: items.data.songData}).then((response) => {
     },(error) => {
         console.log(error.response)
     });

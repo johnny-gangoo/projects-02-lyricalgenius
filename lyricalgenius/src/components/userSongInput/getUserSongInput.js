@@ -4,6 +4,7 @@ import './getUserSongInput.css';
 import ListView from './songListComponent';
 import LyricsModal from './modal'
 import { toast } from 'react-toastify';
+import { getFromStorage, setInStorage} from '../functions/store.js';
 
 
 class GetUserInput extends Component {
@@ -20,6 +21,21 @@ class GetUserInput extends Component {
             preview: []
         }
         this.initialState = this.state;
+    }
+
+    componentDidMount(){
+        const token = getFromStorage("lgut")
+        if(!token){ //lyricalgenius user token
+            window.location.href = './';
+        }else{
+            axios.post("http://localhost:3001/verify", token).then(res => {
+                if (res.data == "Invalid") {
+                    window.location.href = './';
+                }
+            }).catch(error => {
+                console.log(error)
+            });
+        }
     }
 
 
@@ -153,13 +169,13 @@ class GetUserInput extends Component {
 
                 <div class="row justify-content-center">
                     {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
-                        <li key={index}>
                             <div class="col-sm-4">
+                                <li key={index}>
                                 <div class="card text-center" onClick={this.handleListItemOnClick.bind(this, songObj)}>
                                     <ListView songObj={songObj} preview={preview} index={index} />
                                 </div>
+                                </li>
                             </div>
-                        </li>
                     ))}
                     {launchModal === true &&
                         <LyricsModal handleCallBack={this.handleCallBack} preview={preview} songObj={songData} songObjIndex={songObjIndex} uniqueLyricData={uniqueLyricData} allLyricData={allLyricData} />

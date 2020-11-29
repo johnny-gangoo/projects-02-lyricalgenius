@@ -3,8 +3,13 @@ import LoginRegisterPage from './loginregister.js';
 import background from '../../images/background.mp4';
 import '../../login.css';
 import logo from '../../images/logo.png';
+import { getFromStorage} from '../functions/store.js';
 
 class Signin extends Component {
+
+    componentDidMount(){
+        const token = getFromStorage("lgut");
+    }
 
     render() {
     return (

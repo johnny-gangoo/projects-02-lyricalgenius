@@ -27,7 +27,6 @@ class App extends Component{
         <Route exact path="/chart" component={Chart}/>
         <Route exact path="/favorite" component={Favorite}/>
         <Route component={Error}/>
-
         </Switch>
       </Router>
     )
