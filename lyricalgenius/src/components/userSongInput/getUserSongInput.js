@@ -34,24 +34,6 @@ class GetUserInput extends Component {
     }
 
 
-    // handleSubmit = (event) => {
-    //     if (this.state.title !== "" || this.state.name !== "") {
-    //         event.preventDefault();
-    //         axios.post("http://localhost:3001/getSong", this.state).then(res => {
-    //             res = res.data;
-    //             if (res.length === 0) {
-    //                 this.notifyForSongAndArtist();
-    //             } else {
-    //                 this.setState({ songData: res });
-    //             }
-    //             this.handleSongPreview(this.state.songData)
-    //         }).catch(error => {
-    //             console.log(error)
-    //         });
-    //     }
-    // }
-
-
     handleListItemOnClick = async (songObj) => {
         this.setState({ songObjIndex: this.props.songData.indexOf(songObj) });
         await axios.post("http://localhost:3001/getLyrics", songObj).then(res => {
