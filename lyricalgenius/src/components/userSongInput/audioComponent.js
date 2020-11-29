@@ -9,12 +9,14 @@ class Audio extends Component {
             }
         }
     }
-
+    
     render() {
         return (
             <div>
-                <audio src={this.props.preview} controls="controls"
-                    onPlay={this.pauseOtherAudioPreviews} type='audio/mpeg'></audio>
+                {this.props.preview !== "" &&
+                    <audio src={this.props.preview} controls="controls"
+                        onPlay={this.pauseOtherAudioPreviews} type='audio/mpeg'></audio>
+                }
             </div>
         )
     }

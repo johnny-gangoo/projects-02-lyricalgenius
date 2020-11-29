@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './getUserSongInput.css';
 import ListView from './songListComponent';
 import LyricsModal from './modal'
 import { toast } from 'react-toastify';
 import { getFromStorage, setInStorage} from '../functions/store.js';
 
+import './getUserSongInput.css';
+import LogoWhite from '../../images/Logo-Orange.png'
 
 class GetUserInput extends Component {
     constructor(props) {
@@ -113,7 +114,7 @@ class GetUserInput extends Component {
     }
 
     notifyForSongAndArtist = async () => {
-        await toast('Song/Artist could not be found...' + '\n' + 'please try again', { position: toast.POSITION.TOP_CENTER, autoClose: 2500 })
+        await toast.warning('Song/Artist could not be found...' + '\n' + 'please try again', { position: toast.POSITION.TOP_CENTER, autoClose: 2500 })
         setTimeout(() => window.location.reload(false), 2500);
     }
 
@@ -129,33 +130,22 @@ class GetUserInput extends Component {
 
         return (
             <div>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                <nav class="navbar navbar-expand-lg ournavbar">
+                    <a class="navbar-brand" href="#">
+                        <img class="logo" src={LogoWhite} />
+                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
+                            <li class="nav-item rounded-pill">
                                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            <li class="nav-item rounded-pill">
+                                <a class="nav-link" href="#">About Us</a>
                             </li>
                         </ul>
                         <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0">
@@ -167,21 +157,25 @@ class GetUserInput extends Component {
                     </div>
                 </nav>
 
-                <div class="row justify-content-center">
-                    {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
-                            <div class="col-sm-4">
-                                <li key={index}>
+                <div class="row background">
+                    <div class="col-1"></div>
+                    <div class="col-10" align="center" style={{ "float": "left" }}>
+                        {songData.map((songObj, index) => ( //Takes every index in array and place it into a list item
+                            <li key={index}>
                                 <div class="card text-center" onClick={this.handleListItemOnClick.bind(this, songObj)}>
                                     <ListView songObj={songObj} preview={preview} index={index} />
                                 </div>
-                                </li>
-                            </div>
-                    ))}
+                            </li>
+                        ))}
+                    </div>
+                    <div class="col-1"></div>
+
                     {launchModal === true &&
                         <LyricsModal handleCallBack={this.handleCallBack} preview={preview} songObj={songData} songObjIndex={songObjIndex} uniqueLyricData={uniqueLyricData} allLyricData={allLyricData} />
                     }
                 </div>
             </div>
+
         )
     }
 }
