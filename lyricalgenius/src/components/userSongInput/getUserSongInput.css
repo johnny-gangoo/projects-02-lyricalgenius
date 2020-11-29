@@ -30,7 +30,7 @@ li {
 .card {
     margin: 5px;
     border-style: none;
-    background-color: white !important;
+    background-color: #f1f3f4 !important;
     border-radius: 30px !important;
     margin-top: 20px;
     display: inline-block;
