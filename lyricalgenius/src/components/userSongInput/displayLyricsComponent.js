@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import axios from 'axios';
 import LikeButton from './likeButton.js';
-import favorite from '../functions/favorite.js';
-import emptyheart from '../../images/icons/empty-heart.png';
-import ModalForUserInput from '../userSongInput/modalForRecepiant'
-
+import ModalForUserInput from './modalForRecipient'
 
 class DisplayLyrics extends Component {
     constructor(props) {
         super(props);
         this.state = {
             sections: [],
-            clearColors: []
+            clearColors: [],
+            isSectionsArrayEmpty: true
         }
     }
 
-    sendSections = () => {
+    sendSections = async () => {
         // //will send to Vlad from here
+        if (this.state.sections.length !== 0) {
+            await this.setState({ isSectionsArrayEmpty: false })
+        }
         console.log(this.state.sections);
-    
     }
 
-    sendAll = (allSections) => {
-        
+    sendAll = async (allSections) => {
+        await this.setState({ isSectionsArrayEmpty: false })
         //will send to Vlad from here
         console.log(allSections)
     }
@@ -72,9 +71,13 @@ class DisplayLyrics extends Component {
         }
     }
 
-    resetState = async () => { 
-        await this.setState({sections: [], clearColors: []})
+    resetState = async () => {
+        await this.setState({ sections: [], clearColors: [] })
         console.log("this is sections " + this.state.sections)
+    }
+
+    handleResetModal = async () => {
+        this.setState({ isSectionsArrayEmpty: true });
     }
 
     render() {
@@ -82,8 +85,8 @@ class DisplayLyrics extends Component {
             <div>
                 <div class="row">
                     <div class="col-12">
-                        <div>
-                        <ModalForUserInput LyricsArray={this.state.sections} />
+                        {this.state.isSectionsArrayEmpty === false && <ModalForUserInput LyricsArray={this.state.sections} handleResetModal={this.handleResetModal.bind(this)} />}
+                        <button onClick={this.sendSections.bind(this)}>Done</button>
                         <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button>
                         <button onClick={() => {
                             <li class="ListItemLyrics">
@@ -93,11 +96,9 @@ class DisplayLyrics extends Component {
                                 {this.resetState()}
                             </li>
                         }}>Clear Selections</button>
-                        </div>
-                        <LikeButton song={this.props}/>
+                        <LikeButton song={this.props} />
                         <br></br>
                         <br></br>
-
                     </div>
                 </div>
                 <div class="row">
@@ -114,9 +115,10 @@ class DisplayLyrics extends Component {
                         ))}
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-12">
-                    <br></br>
+                        <br></br>
                         <button onClick={this.sendSections.bind(this)}>Done</button>
                         <button onClick={this.sendAll.bind(this, this.props.allLyricData)}>Send All</button>
                         <button onClick={() => {
@@ -127,11 +129,11 @@ class DisplayLyrics extends Component {
                                 {this.resetState()}
                             </li>
                         }}>Clear Selections</button>
-                        <LikeButton song={this.props}/>
+                        <LikeButton song={this.props} />
                         <br></br>
                         <br></br>
-            </div>
                     </div>
+                </div>
             </div>
         )
     }
