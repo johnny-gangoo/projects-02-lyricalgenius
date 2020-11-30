@@ -3,6 +3,7 @@ import LogoWhite from '../../images/Logo-Orange.png'
 import axios from 'axios';
 import GetUserInput from './getUserSongInput.js';
 import Chart from './charts.js';
+import Home from '../pages/home.js';
 import Favorite from './favoritedSongs.js';
 import AboutUs from '../pages/aboutus.js';
 import { toast } from 'react-toastify';
@@ -133,7 +134,7 @@ class Navbar extends React.Component {
 
           <Router>
             <Switch>
-              <Route exact path="/home" component={this.state.renderChild ? Chart : null} />
+              <Route exact path="/home" component={this.state.renderChild ? Home : null} />
               <Route exact path="/aboutus" component={this.state.renderChild ? AboutUs : null} />
               <Route exact path="/chart" component={this.state.renderChild ? Chart : null} />
               <Route exact path="/favorite" component={this.state.renderChild ? Favorite : null} />
