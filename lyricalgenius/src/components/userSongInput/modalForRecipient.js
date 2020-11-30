@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import SendLyrics from "./phoneEmailAPI";
 
 
 function ModalForUserInput(props) {
@@ -28,7 +29,7 @@ function ModalForUserInput(props) {
                 </div>
           </Modal.Header>
           <Modal.Body>
-              here we are going to call your class and give it the array and phone # or email
+              <SendLyrics LyricsArray={props.LyricsArray} />
           </Modal.Body>
         </Modal>
       </>

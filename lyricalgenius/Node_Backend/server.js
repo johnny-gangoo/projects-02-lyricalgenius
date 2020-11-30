@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 var genius = require("./genius_api/getSongData");
 var deezer = require('./deezer_api/deezerAPI');
 var parseSongLyrics = require('./genius_api/parseSongLyrics');
+let gmail = require('./phone_email_api/phoneEmailAPI');
 const port = 3001;
 
 const User = require('./models/user.js');
@@ -279,6 +280,33 @@ app.post('/checkIsFavorited', async(request,response) =>{
         await client.close();
         response.send(retVal);
     }
+});
+
+app.post('/sendEmail', async (request, response) => {
+
+    try {
+
+        let messageString = "";
+        let emailAddress = request.body.address;
+
+        request.body.data.forEach(element => {
+            messageString += "\n\n";
+            messageString += element;
+        });
+
+        let success = await gmail.sendEmail(emailAddress, messageString);
+
+
+        //console.log(messageString);
+        //console.log(request.body.address);
+
+    } finally {
+
+    }
+
+    response.send("");
+    //console.log(response);
+
 });
 
 app.listen(port, () => console.log("Hello from the backend server"));
