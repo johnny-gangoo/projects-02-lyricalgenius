@@ -58,16 +58,16 @@ class AboutUs extends Component {
                         <div class="row text-center">
                             <div class="col-xl-3 col-sm-6 mb-5">
                                 <div class="bg-white rounded shadow-sm py-5 px-4">
-                                    <h5 class="mb-0">Manuella Nevoresky</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                                    <h5 class="mb-0">Jason Xhoxhi</h5><span class="small text-uppercase text-muted">Developer</span>
                                     <ul class="social mb-0 list-inline mt-3">
-                                        <img class="icon" src={githublogo} href />
+                                    <a href="https://github.com/JasonXhoxhi" title=""><img src={githublogo} class="icon" /></a>
                                     </ul>
                                 </div>
                             </div>
 
                             <div class="col-xl-3 col-sm-6 mb-5">
                                 <div class="bg-white rounded shadow-sm py-5 px-4">
-                                    <h5 class="mb-0">Kyle Skelly</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                                    <h5 class="mb-0">Kyle Skelly</h5><span class="small text-uppercase text-muted">Developer</span>
                                     <ul class="social mb-0 list-inline mt-3">
                                         <a href="https://github.com/Kyle-Skelly" title=""><img src={githublogo} class="icon" /></a>
                                     </ul>
@@ -76,18 +76,18 @@ class AboutUs extends Component {
 
                             <div class="col-xl-3 col-sm-6 mb-5">
                                 <div class="bg-white rounded shadow-sm py-5 px-4">
-                                    <h5 class="mb-0">Tom Sunderland</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                                    <h5 class="mb-0">Johnny Gangoo</h5><span class="small text-uppercase text-muted">Developer</span>
                                     <ul class="social mb-0 list-inline mt-3">
-                                        <img class="icon" src={githublogo} />
+                                    <a href="https://github.com/johnnygangoo" title=""><img src={githublogo} class="icon" /></a>
                                     </ul>
                                 </div>
                             </div>
 
                             <div class="col-xl-3 col-sm-6 mb-5">
                                 <div class="bg-white rounded shadow-sm py-5 px-4">
-                                    <h5 class="mb-0">John Tarly</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                                    <h5 class="mb-0">Vlad K</h5><span class="small text-uppercase text-muted">Developer</span>
                                     <ul class="social mb-0 list-inline mt-3">
-                                        <img class="icon" src={githublogo} />
+                                    <a href="https://github.com/NotASpamBot" title=""><img src={githublogo} class="icon" /></a>
                                     </ul>
                                 </div>
                             </div>
