@@ -262,8 +262,14 @@ app.post('/checkIsFavorited', async(request,response) =>{
         await client.connect(); // Connect to db
         const database = client.db('lyricalgeniusdb1'); // Select db
         const collection = database.collection('users'); // Select cluster
-        const result = await collection.findOne({'favoritesongs': { "$in": [request.body.song]}}, {'token': {'$eq': request.body.token}}); // Query
-        if(result == null){
+        const result = await collection.findOne({'token': {'$eq': request.body.token.token}}); // Query
+        let hasIt = false
+        result.favoritesongs.each(song => {
+            if(song.id == request.body.song.id){
+                hasIt = true;
+            }
+        });
+        if(hasIt){
             retVal = false;
         }
         else{

@@ -38,28 +38,30 @@ class Charts extends Component {
 
     render() {
         return (
-            <div>
-                <h1 align="center">Favorites</h1>
-                <div className="card">
-                    <div className="card-header" align="center">Favorited Songs</div>
+            <div className="background">
+                <h1 align="center" style={{"font-family":"cursive","color":"white","paddingTop":"20px"}}>Favorites</h1>
+                <div className="container-fluid" align="center">
+                <div id="favoriteCard" className="card" style={{"width": "50%"}}>
+                    <div className="card-header" align="center" style={{"font-family":"cursive","background":"#dd6c4d","color":"white"}}></div>
                     <div className="card-body">
                         <table className="table" align="center">
-                        <thead align="center">
+                        {/* <thead align="center">
                             <td>Song</td>
                             <td>Artist</td>
-                        </thead>
+                        </thead> */}
                         <tbody align="center">
                         {this.state.favorites.map((fav,index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{fav.title}</td>
-                                    <td>{fav.name}</td>
+                                    <td align="left" width="20%"><img className="img-fluid" src={fav.albumArt} style={{"height":"18%","width":"100%"}}></img></td>
+                                    <td style={{"fontSize": "18px","vertical-align":"middle","text-align":"left"}}>{fav.title}</td>
+                                    <td style={{"fontSize": "18px","vertical-align":"middle"}}>{fav.name}</td>
                                 </tr>
                             )
-
                         })}
                         </tbody>
                         </table>
+                    </div>
                     </div>
                 </div>
             </div>
