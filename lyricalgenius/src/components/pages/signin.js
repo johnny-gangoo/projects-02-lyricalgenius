@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import LoginRegisterPage from './loginregister.js';
 import background from '../../images/background.mp4';
 import '../../login.css';
-import logo from '../../images/logo.png';
+import logo from '../../images/Logo-Orange.png';
 import { getFromStorage} from '../functions/store.js';
 import axios from 'axios';
+
 
 class Signin extends Component {
 
@@ -22,10 +23,9 @@ class Signin extends Component {
     return (
         <div>
         <header className="App-header">
-        <video id="background" autoPlay loop muted><source src={background} type='video/mp4' /></video>
-            <div className="row">
-                <div id="logo-img" className="col-6">
-                <img src={logo} alt="" width="100%" height="20%"></img>
+            <div className="container-fluid" id="back">
+                <div style={{"textAlign":"center"}}>
+                <img src={logo} alt="" width="20%" height="20%" style={{"background":"transparent","position":"relative"}}></img>
                 </div>
             <LoginRegisterPage />
             
