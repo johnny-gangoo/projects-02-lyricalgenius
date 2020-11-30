@@ -4,11 +4,18 @@ import background from '../../images/background.mp4';
 import '../../login.css';
 import logo from '../../images/logo.png';
 import { getFromStorage} from '../functions/store.js';
+import axios from 'axios';
 
 class Signin extends Component {
 
     componentDidMount(){
         const token = getFromStorage("lgut");
+        if(token){
+            axios.post("http://localhost:3001/logout", {token: token}).then(res => {
+            }).catch(error => {
+                console.log(error)
+            });
+        }
     }
 
     render() {

@@ -137,7 +137,6 @@ class DisplayLyrics extends Component {
                                 {this.resetState()}
                             </li>
                         }}>Clear Selections</button>
-                        <LikeButton song={this.props} />
                         <br></br>
                         <br></br>
                     </div>

@@ -203,12 +203,12 @@ app.post('/logout', async (request, response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
     const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
     const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
-    let retVal = "";
+    let retVal = "Logged Out";
     try{
         await client.connect(); // Connect to db
         const database = client.db('lyricalgeniusdb1'); // Select db
         const collection = database.collection('usersessions'); // Select cluster
-        const result = await collection.findOneAndUpdate( { userToken: { "$eq": request.body.token}}, {"$set": {isDeleted: true}}); // Query
+        const result = await collection.findOneAndUpdate( { userToken: { "$eq": request.body.token.token}}, {"$set": {isDeleted: true}}); // Query
     } finally{
         await client.close();
         response.send(retVal);

@@ -6,7 +6,10 @@ import Chart from './charts.js';
 import Favorite from './favoritedSongs.js';
 import AboutUs from '../pages/aboutus.js';
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { getFromStorage} from '../functions/store.js';
 
 class Navbar extends React.Component {
 
@@ -102,8 +105,9 @@ class Navbar extends React.Component {
               <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
 
               <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style={{"marginRight": "10px"}}>Search</button>
             </form>
+            <FontAwesomeIcon size= '2x' icon={faSignOutAlt} className="img-fluid" style={{"color": "white","cursor": "pointer"}} onClick={() => {let token = getFromStorage("lgut"); axios.post("http://localhost:3001/logout", {token: token}).then(res => {window.location.href = "./";}).catch(error => {console.log(error)})}} />
           </div>
         </nav>
 
