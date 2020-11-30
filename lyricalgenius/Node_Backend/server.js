@@ -7,6 +7,8 @@ var parseSongLyrics = require('./genius_api/parseSongLyrics');
 let gmail = require('./phone_email_api/phoneEmailAPI');
 const port = 3001;
 
+const twilio = require('./twillio/send.js');
+
 const User = require('./models/user.js');
 
 const mongoose = require('mongoose');
@@ -280,6 +282,14 @@ app.post('/checkIsFavorited', async(request,response) =>{
         await client.close();
         response.send(retVal);
     }
+});
+
+app.post('/sendSMSTwillio', async (request, response) => {
+    return retVal = twilio.sendSMS(request.body.address,request.body.data);
+});
+
+app.post('/sendWA', async (request, response) => {
+    return retVal = twilio.sendWA(request.body.address,request.body.data);
 });
 
 app.post('/sendEmail', async (request, response) => {
