@@ -94,7 +94,7 @@ class Charts extends Component {
     render() {
         return (
             <div className="background">
-                <h1 align="center" style={{"color":"white","fontFamily":"cursive","paddingTop":"20px"}}>Lyrical Genius Trending</h1>
+                <h1 className="display-4" align="center" style={{"color":"white","paddingTop":"20px"}}>Lyrical Genius Trending</h1>
                 <div className="container-fluid">
                 <div className="row">
                     <div className="col-6">

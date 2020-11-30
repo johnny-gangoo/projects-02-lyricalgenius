@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LoginRegisterPage from './loginregister.js';
-import background from '../../images/background.mp4';
 import '../../login.css';
 import logo from '../../images/Logo-Orange.png';
 import { getFromStorage} from '../functions/store.js';

@@ -39,7 +39,7 @@ class Charts extends Component {
     render() {
         return (
             <div className="background">
-                <h1 align="center" style={{"font-family":"cursive","color":"white","paddingTop":"20px"}}>Favorites</h1>
+                <h1 className="display-4" align="center" style={{"color":"white","paddingTop":"20px"}}>Favorites</h1>
                 <div className="container-fluid" align="center">
                 <div id="favoriteCard" className="card" style={{"width": "50%"}}>
                     <div className="card-header" align="center" style={{"font-family":"cursive","background":"#dd6c4d","color":"white"}}></div>
