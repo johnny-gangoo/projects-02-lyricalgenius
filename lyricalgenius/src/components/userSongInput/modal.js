@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DisplayLyrics from './displayLyricsComponent';
 import { Modal } from 'react-bootstrap';
 import Audio from './audioComponent';
+import './modal.css';
 
 function LyricsModal(props) {
     const [lgShow, setLgShow] = useState(true);
