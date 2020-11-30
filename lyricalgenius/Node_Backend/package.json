@@ -14,5 +14,8 @@
     "genius-lyrics-api": "^3.0.3",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.18"
+  },
+  "devDependencies": {
+    "nodemailer": "^6.4.16"
   }
 }

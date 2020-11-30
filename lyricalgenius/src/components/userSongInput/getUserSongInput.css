@@ -35,6 +35,7 @@ li {
     margin-top: 20px;
     display: inline-block;
 }
+
 .card:hover {
     border: 50px #ee6c4d !important;
     transition: 0.2s;

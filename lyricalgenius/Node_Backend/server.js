@@ -4,7 +4,10 @@ const bodyParser = require("body-parser");
 var genius = require("./genius_api/getSongData");
 var deezer = require('./deezer_api/deezerAPI');
 var parseSongLyrics = require('./genius_api/parseSongLyrics');
+let gmail = require('./phone_email_api/phoneEmailAPI');
 const port = 3001;
+
+const twilio = require('./twillio/send.js');
 
 const User = require('./models/user.js');
 
@@ -224,8 +227,14 @@ app.post('/favorite', async(request,response) => {
         await client.connect(); // Connect to db
         const database = client.db('lyricalgeniusdb1'); // Select db
         const collection = database.collection('users'); // Select cluster
-        const result = await collection.findOne({'favoritesongs': { "$in": [request.body.song]}}, {'token': {'$eq': request.body.token}}); // Query
-        if(result == null){
+        const result = await collection.findOne({'token': {'$eq': request.body.token}}); // Query
+        let hasIt = false
+        result.favoritesongs.forEach(song => {
+            if(song.id == request.body.song.id){
+                hasIt = true;
+            }
+        });
+        if(!hasIt){
             const add = await collection.updateOne({"token": request.body.token}, {$addToSet: {favoritesongs: request.body.song} });
         }
         else{
@@ -262,8 +271,14 @@ app.post('/checkIsFavorited', async(request,response) =>{
         await client.connect(); // Connect to db
         const database = client.db('lyricalgeniusdb1'); // Select db
         const collection = database.collection('users'); // Select cluster
-        const result = await collection.findOne({'favoritesongs': { "$in": [request.body.song]}}, {'token': {'$eq': request.body.token}}); // Query
-        if(result == null){
+        const result = await collection.findOne({'token': {'$eq': request.body.token.token}}); // Query
+        let hasIt = false
+        result.favoritesongs.forEach(song => {
+            if(song.id == request.body.song.id){
+                hasIt = true;
+            }
+        });
+        if(!hasIt){
             retVal = false;
         }
         else{
@@ -273,6 +288,41 @@ app.post('/checkIsFavorited', async(request,response) =>{
         await client.close();
         response.send(retVal);
     }
+});
+
+app.post('/sendSMSTwillio', async (request, response) => {
+    return retVal = twilio.sendSMS(request.body.address,request.body.data);
+});
+
+app.post('/sendWA', async (request, response) => {
+    return retVal = twilio.sendWA(request.body.address,request.body.data);
+});
+
+app.post('/sendEmail', async (request, response) => {
+
+    try {
+
+        let messageString = "";
+        let emailAddress = request.body.address;
+
+        request.body.data.forEach(element => {
+            messageString += "\n\n";
+            messageString += element;
+        });
+
+        let success = await gmail.sendEmail(emailAddress, messageString);
+
+
+        //console.log(messageString);
+        //console.log(request.body.address);
+
+    } finally {
+
+    }
+
+    response.send("");
+    //console.log(response);
+
 });
 
 app.listen(port, () => console.log("Hello from the backend server"));

@@ -93,17 +93,18 @@ class Charts extends Component {
 
     render() {
         return (
-            <div>
-                <h1 align="center">Lyrical Genius Trending</h1>
+            <div className="background">
+                <h1 align="center" style={{"color":"white","fontFamily":"cursive","paddingTop":"20px"}}>Lyrical Genius Trending</h1>
+                <div className="container-fluid">
                 <div className="row">
                     <div className="col-6">
-                        <div className="card">
-                            <div className="card-header" align="center">
+                        <div className="card" style={{"width":"100%"}}>
+                            <div className="card-header" align="center" style={{"background":"#dd6c4d","color":"white"}}>
                             Trending Song Searches
                             </div>
                             <div className="card-body">
                                 <table className="table">
-                                <thead>
+                                <thead style={{"background":"#3D5A80","color":"white"}}>
                                     <td></td>
                                     <td align="center">Song</td>
                                     <td align="right">Searches</td>
@@ -122,13 +123,13 @@ class Charts extends Component {
                         </div>
                     </div>
                     <div className="col-6">
-                        <div className="card">
-                            <div className="card-header" align="center">
+                        <div className="card" style={{"width":"100%"}}>
+                            <div className="card-header" align="center" style={{"background":"#dd6c4d","color":"white"}}>
                             Trending Artist Searches
                             </div>
                             <div className="card-body">
                                 <table className="table">
-                                <thead>
+                                <thead style={{"background":"#3D5A80","color":"white"}}>
                                     <td></td>
                                     <td align="center">Artist</td>
                                     <td align="right">Searches</td>
@@ -146,7 +147,8 @@ class Charts extends Component {
                             </div>
                         </div>
                     </div>
-                </div>         
+                </div>    
+                </div>     
             </div>
         )
     }

@@ -32,7 +32,7 @@ class DisplayLyrics extends Component {
     sendAll = async (allSections) => {
         await this.setState({ isSectionsArrayEmpty: false })
         //will send to Vlad from here
-        console.log(allSections)
+        console.log(allSections);
     }
 
     addToSectionsArray = async (songObj, index) => {

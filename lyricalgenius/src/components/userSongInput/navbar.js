@@ -20,9 +20,28 @@ class Navbar extends React.Component {
       name: "",
       renderChild: true,
       songData: [],
-      preview: []
+      preview: [],
+      isReady: false
     }
   }
+
+  componentDidMount(){
+    const token = getFromStorage("lgut")
+    if(!token){ //lyricalgenius user token
+        window.location.href = './';
+    }else{
+        axios.post("http://localhost:3001/verify", token).then(res => {
+            if (res.data == "Invalid") {
+                window.location.href = './';
+            }
+            else{
+                this.setState({isReady: true});
+            }
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+}
 
   handleSubmit = (event) => {
     if (this.state.title !== "" || this.state.name !== "") {
@@ -77,52 +96,57 @@ class Navbar extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <nav class="navbar navbar-dark navbar-expand-lg ournavbar">
-          <a class="navbar-brand" href="/home">
-            <img class="logo" src={LogoWhite} />
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item rounded-pill">
-                <a class="nav-link" href="/home">Home<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item rounded-pill">
-                <a class="nav-link" href="/chart">Charts</a>
-              </li>
-              <li class="nav-item rounded-pill">
-                <a class="nav-link" href="/favorite">My Favorites</a>
-              </li>
-              <li class="nav-item rounded-pill">
-                <a class="nav-link" href="/aboutus">About Us</a>
-              </li>
-            </ul>
-            <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0 userinput">
-              <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
+    if(this.state.isReady){
+      return (
+        <div>
+          <nav class="navbar navbar-dark navbar-expand-lg ournavbar">
+            <a class="navbar-brand" href="/home">
+              <img class="logo" src={LogoWhite} />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item rounded-pill">
+                  <a class="nav-link" href="/home">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item rounded-pill">
+                  <a class="nav-link" href="/chart">Charts</a>
+                </li>
+                <li class="nav-item rounded-pill">
+                  <a class="nav-link" href="/favorite">My Favorites</a>
+                </li>
+                <li class="nav-item rounded-pill">
+                  <a class="nav-link" href="/aboutus">About Us</a>
+                </li>
+              </ul>
+              <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0 userinput">
+                <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
 
-              <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style={{"marginRight": "10px"}}>Search</button>
-            </form>
-            <FontAwesomeIcon size= '2x' icon={faSignOutAlt} className="img-fluid" style={{"color": "white","cursor": "pointer"}} onClick={() => {let token = getFromStorage("lgut"); axios.post("http://localhost:3001/logout", {token: token}).then(res => {window.location.href = "./";}).catch(error => {console.log(error)})}} />
-          </div>
-        </nav>
+                <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style={{"marginRight": "10px"}}>Search</button>
+              </form>
+              <FontAwesomeIcon size= '2x' icon={faSignOutAlt} className="img-fluid" style={{"color": "white","cursor": "pointer"}} onClick={() => {let token = getFromStorage("lgut"); axios.post("http://localhost:3001/logout", {token: token}).then(res => {window.location.href = "./";}).catch(error => {console.log(error)})}} />
+            </div>
+          </nav>
 
-        <Router>
-          <Switch>
-            <Route exact path="/home" component={this.state.renderChild ? Chart : null} />
-            <Route exact path="/aboutus" component={this.state.renderChild ? AboutUs : null} />
-            <Route exact path="/chart" component={this.state.renderChild ? Chart : null} />
-            <Route exact path="/favorite" component={this.state.renderChild ? Favorite : null} />
-            <Route component={Error} />
-          </Switch>
-        </Router>
-        <GetUserInput songData={this.state.songData} preview={this.state.preview} />
-      </div>
-    );
+          <Router>
+            <Switch>
+              <Route exact path="/home" component={this.state.renderChild ? Chart : null} />
+              <Route exact path="/aboutus" component={this.state.renderChild ? AboutUs : null} />
+              <Route exact path="/chart" component={this.state.renderChild ? Chart : null} />
+              <Route exact path="/favorite" component={this.state.renderChild ? Favorite : null} />
+              <Route component={Error} />
+            </Switch>
+          </Router>
+          <GetUserInput songData={this.state.songData} preview={this.state.preview} />
+        </div>
+      );
+    }
+    else{
+      return null;
+    }
   }
 }
 export default Navbar;
