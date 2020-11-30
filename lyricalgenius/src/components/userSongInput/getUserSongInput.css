@@ -92,6 +92,9 @@ input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
 }
 
+.userinput {
+    justify-content: center;
+}
 /* NAVBAR LOGO*/
 .logo {
     max-height: 40px;

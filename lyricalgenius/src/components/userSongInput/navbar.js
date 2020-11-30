@@ -101,7 +101,7 @@ class Navbar extends React.Component {
                 <a class="nav-link" href="/aboutus">About Us</a>
               </li>
             </ul>
-            <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0">
+            <form onSubmit={this.handleSubmit.bind(this)} class="form-inline my-2 my-lg-0 userinput">
               <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter a Song Name' name='title' onChange={this.handleInputChange.bind(this)} />
 
               <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
