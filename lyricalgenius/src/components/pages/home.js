@@ -44,7 +44,7 @@ class Home extends Component {
                 <div className="container-fluid" id="homeheader">
                     <div class="hero-image">
                         <div class="hero-text">
-                            <h1 class="display-4">Welcome back, {this.state.name}.</h1>
+                            <h1 class="display-4">Welcome {this.state.name}!</h1>
                             <p>Check out what's trending</p>
                             <button class="btn btn-outline-success my-2 my-sm-0" id="trendingbutton" onClick={function(){window.location.href= './chart'}}>What's Popular</button>
                         </div>
