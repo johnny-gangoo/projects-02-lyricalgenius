@@ -12,7 +12,7 @@ class AboutUs extends Component {
                     <div class="container py-5 rounded textcontainer">
                         <h1 class="display-4 aboutuslargetext">Behind LyricalGenius</h1>
                         <p class="lead aboutussmalltext">
-                            LyricalGenius was started by 4 Temple University students as a class project. We wanted to create a quick and easy
+                            LyricalGenius was started by four Temple University students as a class project. We wanted to create a quick and easy
                             way to search for and send lyrics to friends and family. At the time of development, COVID-19 was a huge issue and 
                             we felt that not only was it important to be able to reach out to loved ones, lyrics often put into words what we struggled
                             to convey. Thus, LyricalGenius was born.
