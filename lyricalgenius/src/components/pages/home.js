@@ -1,14 +1,50 @@
 import React, { Component } from 'react';
 import './home.css';
+import axios from 'axios';
+import { getFromStorage} from '../functions/store.js';
 
 class Home extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            isLoading: true
+        }
+    }
+
+    componentDidMount(){
+        const token = getFromStorage("lgut")
+        if(!token){ //lyricalgenius user token
+            window.location.href = './';
+        }
+        else{
+            axios.post("http://localhost:3001/getName", token).then(res => {
+                console.log(res);
+                if (res.data != "") {
+                    this.setState({
+                        name: res.data,
+                        isLoading: false
+                    })
+                }
+                else{
+                    this.setState({
+                        isLoading: false
+                    })
+                }
+            });
+        }
+    }
+
+
     render() {
+        if(!this.state.isLoading){
         return (
             <div>
                 <div className="container-fluid" id="homeheader">
                     <div class="hero-image">
                         <div class="hero-text">
-                            <h1 class="display-4">Welcome back, buddy.</h1>
+                            <h1 class="display-4">Welcome back, {this.state.name}.</h1>
                             <p>Check out what's trending</p>
                             <button class="btn btn-outline-success my-2 my-sm-0" id="trendingbutton">What's Popular</button>
                         </div>
@@ -57,6 +93,10 @@ class Home extends Component {
                 </div>
             </div>
         )
+        }
+        else{
+            return null;
+        }
     }
 }
 export default Home;

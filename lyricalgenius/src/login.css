@@ -1,11 +1,11 @@
-body, html {
-    height: 100%;
+#back{
+    height: 100vh;
     width: 100%;
     background-image: url('./images/loginimage.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    position: fixed;
 }
 
 .form-field{
@@ -27,8 +27,8 @@ body, html {
     position: relative;
     background: rgba(41, 50, 65, 0.8);
     width: 30%;
+    min-width: 300px;
     margin: 0 auto;
-    height: 100%;
     border-radius: 30px;
     padding-bottom: 10px;
 }

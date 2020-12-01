@@ -11,7 +11,7 @@ class LoginRegisterPage extends Component {
         super(props)
         this.state = {
             loginVisable: true, // Which component is showing
-            toggleText: "Already have an account? Login here." // Component toggle text
+            toggleText: "Need an account? Sign up here." // Component toggle text
         }
         this.initialState=this.state;
     }
