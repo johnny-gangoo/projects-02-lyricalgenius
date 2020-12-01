@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ListView from './songListComponent';
 import LyricsModal from './modal'
-import { getFromStorage, setInStorage} from '../functions/store.js';
+import { getFromStorage, setInStorage } from '../functions/store.js';
 import './getUserSongInput.css';
 import { toast } from 'react-toastify';
 
@@ -18,11 +18,11 @@ class GetUserInput extends Component {
         this.initialState = this.state;
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const token = getFromStorage("lgut")
-        if(!token){ //lyricalgenius user token
+        if (!token) { //lyricalgenius user token
             window.location.href = './';
-        }else{
+        } else {
             axios.post("http://localhost:3001/verify", token).then(res => {
                 if (res.data == "Invalid") {
                     window.location.href = './';
@@ -56,8 +56,8 @@ class GetUserInput extends Component {
         await toast.warning('Lyrics for this song could not be found...' + '\n' + 'please try again', { position: toast.POSITION.TOP_CENTER, autoClose: 2500 })
         this.setState({ launchModal: false });
         setTimeout(() => window.location.reload(false), 2500);
-    
-      }
+
+    }
 
 
     handleCallBack = () => {
