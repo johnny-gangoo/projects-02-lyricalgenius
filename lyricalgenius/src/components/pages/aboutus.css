@@ -1,5 +1,5 @@
 .icon {
-    max-width: 20px;
+    max-width: 40px;
 }
 
 .darkbackground {
@@ -7,6 +7,21 @@
 }
 
 .textcontainer {
-    background-color: white;
+    background-color: #293241 !important;
     margin-bottom: 40px;
+    border-color: #ee6c4d;
+    border: 10px;
+}
+
+.aboutuslargetext {
+    color: #ee6c4d;
+}
+
+.aboutussmalltext {
+    color: white;
+    padding: 3px;
+}
+
+.job {
+    color: white !important;
 }
