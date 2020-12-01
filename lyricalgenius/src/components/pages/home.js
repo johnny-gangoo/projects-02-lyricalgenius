@@ -46,7 +46,7 @@ class Home extends Component {
                         <div class="hero-text">
                             <h1 class="display-4">Welcome back, {this.state.name}.</h1>
                             <p>Check out what's trending</p>
-                            <button class="btn btn-outline-success my-2 my-sm-0" id="trendingbutton">What's Popular</button>
+                            <button class="btn btn-outline-success my-2 my-sm-0" id="trendingbutton" onClick={function(){window.location.href= './chart'}}>What's Popular</button>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ class Home extends Component {
                     </div>
 
                     <div class="col-xl-4 col-sm-4 mb-5">
-                        <div class="home shadow-sm py-5 px-4">
+                        <div class="home  py-5 px-4">
                             <h5 class="mb-0 display-4 homelargetext">Effective</h5>
                             <span class="text-muted display-8 homesmalltext">
                                 LyricalGenius can send your lyrics to just about any device in the world. Whether the person you sent the lyrics too 
