@@ -41,7 +41,7 @@ class Charts extends Component {
             <div className="background">
                 <h1 className="display-4" align="center" style={{"color":"white","paddingTop":"20px"}}>Favorites</h1>
                 <div className="container-fluid" align="center">
-                <div id="favoriteCard" className="card" style={{"width": "50%"}}>
+                <div id="favoriteCard" className="card" style={{"width": "50%","minWidth":"400px"}}>
                     <div className="card-header" align="center" style={{"font-family":"cursive","background":"#dd6c4d","color":"white"}}></div>
                     <div className="card-body">
                         <table className="table" align="center">
@@ -53,7 +53,7 @@ class Charts extends Component {
                         {this.state.favorites.map((fav,index) => {
                             return (
                                 <tr key={index}>
-                                    <td align="left" width="20%"><img className="img-fluid" src={fav.albumArt} style={{"height":"18%","width":"100%"}}></img></td>
+                                    <td align="left" width="20%"><img className="img-fluid" src={fav.albumArt} style={{"height":"18%","width":"100%","minWidth":"140px","minHeight":"200px"}}></img></td>
                                     <td style={{"fontSize": "18px","vertical-align":"middle","text-align":"left"}}>{fav.title}</td>
                                     <td style={{"fontSize": "18px","vertical-align":"middle"}}>{fav.name}</td>
                                 </tr>
