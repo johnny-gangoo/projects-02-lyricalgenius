@@ -1,19 +1,8 @@
 import React, {Component} from "react";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
-
-function sendEmail(address, sectionArray) {
-
-    axios.post('http://localhost:3001/sendEmail', {
-        address: address,
-        data: sectionArray,
-    }).then(resp => {
-        console.log(resp);
-    }).catch(err => {
-        console.log(err);
-    });
-}
-
+// Phone/Email input component in modal
 class SendLyrics extends Component {
 
     constructor(props) {
@@ -41,8 +30,10 @@ class SendLyrics extends Component {
             data: this.props.LyricsArray,
         }).then(resp => {
             console.log(resp);
+            toast.warning(resp.data.msg, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         }).catch(err => {
             console.log(err);
+            toast.warning("Error sending lyrics!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         });
     }
 

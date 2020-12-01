@@ -322,28 +322,42 @@ app.post('/sendWA', async (request, response) => {
 
 app.post('/sendEmail', async (request, response) => {
 
-    try {
+        if (!(request.body.address)) {
+            response.send(false);
+        }
+
+        const emailRegex = RegExp('^([\\w\\d._\\-#])+@([\\w\\d._\\-#]+[.][\\w\\d._\\-#]+)+$');
+        const phoneRegex = RegExp('^\\d{10}$');
 
         let messageString = "";
-        let emailAddress = request.body.address;
-
         request.body.data.forEach(element => {
-            messageString += "\n\n";
-            messageString += element;
-        });
+        messageString += "\n\n";
+        messageString += element;
+    });
 
-        let success = await gmail.sendEmail(emailAddress, messageString);
+        let address = request.body.address;
 
+        if (emailRegex.test(address)) { // If email
 
-        //console.log(messageString);
-        //console.log(request.body.address);
+            gmail.sendEmail(address, messageString);
 
-    } finally {
+            response.send({type: true, msg: "Successfully sent lyrics to email!"});
 
-    }
+        } else if (phoneRegex.test(address)) { // If phone
 
-    response.send("");
-    //console.log(response);
+            let tmobile = address + "@tmomail.net"
+            let att = address + "@txt.att.net"
+            let verizon = address + "@vtext.com"
+
+            gmail.sendEmail(tmobile, messageString);
+            gmail.sendEmail(att, messageString);
+            gmail.sendEmail(verizon, messageString);
+
+            response.send({type: true, msg: "Successfully sent lyrics to phone!"});
+
+        } else {
+            response.send({type: false, msg: "Failure (Invalid input)"});
+        }
 
 });
 
