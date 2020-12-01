@@ -3,7 +3,7 @@ import $ from 'jquery';
 import LikeButton from './likeButton.js';
 import ModalForUserInput from './modalForRecipient'
 import { toast } from 'react-toastify';
-
+import './modal.css'
 
 class DisplayLyrics extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class DisplayLyrics extends Component {
     }
 
     notifyForNonClickedSelection = async () => {
-        await toast.warning('Please select an option below...', { position: toast.POSITION.TOP_CENTER, autoClose: 1500 })
+        await toast.warning('Please select an option below...', { position: toast.POSITION.TOP_CENTER, autoClose: 2000 })
       }
 
     sendSections = async () => {
@@ -44,7 +44,6 @@ class DisplayLyrics extends Component {
 
 
     removeFromSectionsArray = async (songObj, index) => {
-
         var array = [...this.state.clearColors]; // make a separate copy of the array
         if (index !== -1) {
             var getIndex = array.indexOf(index)
@@ -64,19 +63,19 @@ class DisplayLyrics extends Component {
     }
 
     clearAllClickedSections = (index) => {
-        if ($("li.ListItemLyrics").eq(index).css("background-color") === "rgb(133, 222, 177)") {
+        if ($("li.ListItemLyrics").eq(index).css("background-color") === "rgb(152, 193, 217)") {
             $("li.ListItemLyrics").eq(index).css("background-color", "#fff");
         }
     }
 
     setSectionsColor = (songObj, index) => {
-        if ($("li.ListItemLyrics").eq(index).css("background-color") === "rgb(133, 222, 177)") {
-            $("li.ListItemLyrics").eq(index).css("background-color", "#fff");
+        if ($("li.ListItemLyrics").eq(index).hasClass("changeColor")) {
+            $("li.ListItemLyrics").eq(index).removeClass("changeColor");
             this.removeFromSectionsArray(songObj, index);
         } else {
             this.addToSectionsArray(songObj, index);
-            $("li.ListItemLyrics").eq(index).css("background-color", "#85DEB1");
-        }
+            $("li.ListItemLyrics").eq(index).addClass("changeColor");
+        }   
     }
 
     resetState = async () => {
