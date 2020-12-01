@@ -1,33 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-import Axios from 'axios';
+import Signin from './components/pages/signin.js';
+import '../node_modules/jquery/dist/jquery.min.js'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
+import '../node_modules/bootstrap/js/dist/dropdown.js';
+import '../node_modules/popper.js'
+import React, { Component } from 'react';
+import Navbar from './components/userSongInput/navbar'
+import Error from './components/pages/404.js';
 
-function test(){
-  Axios.get('http://localhost:3001/test').then(response =>{
-    console.log(response);
-  });
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+
+toast.configure()
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Signin} />
+            <Navbar />
+            <Route component={Error} />
+          </Switch>
+        </Router>
+      </div>
+    )
+  }
 }
-test();
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
 export default App;
