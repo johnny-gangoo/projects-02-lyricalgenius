@@ -72,6 +72,8 @@ input.transparent-input{
     color: #ffffff;
     caret-color: #ee6c4d;
     padding-top: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
  }
  input.transparent-input:focus{
     border-color:#ffffff;
