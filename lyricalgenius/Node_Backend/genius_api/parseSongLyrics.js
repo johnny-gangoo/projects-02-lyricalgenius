@@ -18,11 +18,12 @@ module.exports = function (songData) {
         filteredLyrics[j] = filteredLyrics[j].replace(/(\r\n|\n|\r|`)/gm, " ");
         if(filteredLyrics[j].charAt(filteredLyrics[j].length - 1) == "]")
         {
-            filteredLyrics.splice(j);
+            console.log(filteredLyrics[j]);
+            filteredLyrics.splice(j,1);
         }
      }
 
-    //console.log(filteredLyrics); //UNCOMMENT TO VIEW LYRICS IN CONSOLE
+    //console.log(lyrics); //UNCOMMENT TO VIEW LYRICS IN CONSOLE
     return {
         uniqueLyrics: filteredLyrics,
         originalyrics: lyrics
