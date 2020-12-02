@@ -17,13 +17,13 @@ class Charts extends Component {
         if(!token){ //lyricalgenius user token
             window.location.href = './';
         }else{
-            axios.post("http://localhost:3001/verify", token).then(res => {
+            axios.post("http://54.165.233.151:8083/verify", token).then(res => {
                 if (res.data == "Invalid") {
                     window.location.href = './';
                 }
                 else{ // load data
                     const token = getFromStorage("lgut");
-                    axios.post("http://localhost:3001/getFavorites", token)
+                    axios.post("http://54.165.233.151:8083/getFavorites", token)
                     .then(res => {
                         this.setState({favorites: res.data});
                     }).catch(error => {
