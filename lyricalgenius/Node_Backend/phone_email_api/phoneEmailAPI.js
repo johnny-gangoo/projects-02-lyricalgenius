@@ -1,10 +1,13 @@
+let config = require("../config.js");
+
 const nodemailer = require("nodemailer");
+
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'lyricalgeniusapi@gmail.com',
-        pass: '4bWW1uz50vx7',
+        user: config.gmail.user,
+        pass: config.gmail.pass,
     }
 });
 
@@ -49,5 +52,3 @@ let sendEmail = async function (address, message) {
 }
 
 module.exports = {sendEmail};
-
-//sendEmail("tuk97813@temple.edu", ["Test1", "Test2"]);

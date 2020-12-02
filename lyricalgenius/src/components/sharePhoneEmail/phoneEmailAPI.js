@@ -25,7 +25,7 @@ class SendLyrics extends Component {
 
         event.preventDefault();
 
-        axios.post('http://54.165.233.151:8083/sendEmail', {
+        axios.post(process.env.REACT_APP_AXIOS_URL + '/sendEmail', {
             address: this.state.phoneEmailAddress,
             data: this.props.LyricsArray,
         }).then(resp => {

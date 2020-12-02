@@ -1,18 +1,20 @@
-var express = require("express");
-var app = express();
+let config = require("./config.js");
+let express = require("express");
+let app = express();
 const bodyParser = require("body-parser");
-var genius = require("./genius_api/getSongData");
-var deezer = require('./deezer_api/deezerAPI');
-var parseSongLyrics = require('./genius_api/parseSongLyrics');
+let genius = require("./genius_api/getSongData");
+let deezer = require('./deezer_api/deezerAPI');
+let parseSongLyrics = require('./genius_api/parseSongLyrics');
 let gmail = require('./phone_email_api/phoneEmailAPI');
-const port = 3001;
 
 const twilio = require('./twillio/send.js');
 
 const User = require('./models/user.js');
 
+const mongoURI = config.mongoose.url; // Database source
+const mongoDB = config.mongoose.database; // Database name
 const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority", {useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(mongoURI, {useUnifiedTopology: true, useNewUrlParser: true});
 
 //Requirements for hashing passwords
 const bcrypt = require('bcrypt');
@@ -31,16 +33,15 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Get Song Enpoint
+// Get Song Endpoint
 app.post('/getSong', async (request, response) =>{
     let songData = await genius.song(request.body); // Genius Query 
     if(songData !== null){ // If it gets a response add it as a valid search
         const MongoClient = require('mongodb').MongoClient; // Establish Client
-        const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-        const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+        const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
         try {
             await client.connect(); // Connect to db
-            const database = client.db('lyricalgeniusdb1'); // Select db
+            const database = client.db(mongoDB); // Select db
             const collection = database.collection('c2'); // Select cluster
             const query1 = {title: request.body.title.toLowerCase(), name: request.body.name.toLowerCase()}; // Establish Query
             const result1 = await collection.findOne(query1); // Query
@@ -63,12 +64,11 @@ app.post('/getSong', async (request, response) =>{
 // Gets chart data from cluster 2
 app.post('/getCharts', async (request, response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
     let result = ""; // Define return
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('c2'); // Select cluster
         result = await collection.find( { count: { $gt: 0 } }).toArray(); // Query
     } finally {
@@ -78,15 +78,15 @@ app.post('/getCharts', async (request, response) =>{
   });
 
 app.post('/getLyrics', async (request, response) =>{
-   let songData = await genius.lyrics(request.body);
-   var lyrics = parseSongLyrics(songData.lyrics);
-   response.send(lyrics);
+    let songData = await genius.lyrics(request.body);
+    const lyrics = parseSongLyrics(songData.lyrics);
+    response.send(lyrics);
 });
 
 app.post('/getPreview', async (request, response) =>{
    let songData = await deezer(request.body).catch(error => {
    console.log(error.response)});
-   if(songData == undefined){
+   if(songData === undefined){
        response.send("");
    }
     response.send(songData);
@@ -95,19 +95,18 @@ app.post('/getPreview', async (request, response) =>{
 // Create User Account
 app.post('/createAccount', async (request, response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
     let retVal = "";
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('users'); // Select cluster
         const result = await collection.findOne( { "username": { "$eq": request.body.username}}); // Query
         if (result == null){ // Means there is no account so we can make one
             const hash = await new Promise((resolve, reject) => { // Need to hash the password so wrap it in a promise
                 bcrypt.hash(request.body.password, salt, function (error,hash) {
                   if(error){
-                    reject(err);
+                    reject(error);
                   }
                   else{
                     resolve(hash);
@@ -144,12 +143,11 @@ app.post('/createAccount', async (request, response) =>{
 
 app.post('/login', async (request, response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
     let retVal = "";
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('users'); // Select cluster
         const result = await collection.findOne( { "username": { "$eq": request.body.username}}); // Query
         if(result != null){
@@ -171,7 +169,7 @@ app.post('/login', async (request, response) =>{
         }
     } finally{
         await client.close();
-        if(retVal == ""){
+        if(retVal === ""){
             response.send("Incorrect Password");
         }
         else{
@@ -182,12 +180,11 @@ app.post('/login', async (request, response) =>{
 
 app.post('/verify', async (request, response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
     let retVal = "";
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('usersessions'); // Select cluster
         const result = await collection.findOne( { userToken: { "$eq": request.body.token}, isDeleted: {"$eq": false}}); // Query
         if(result != null){
@@ -204,12 +201,11 @@ app.post('/verify', async (request, response) =>{
 
 app.post('/logout', async (request, response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
     let retVal = "Logged Out";
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('usersessions'); // Select cluster
         const result = await collection.findOneAndUpdate( { userToken: { "$eq": request.body.token.token}}, {"$set": {isDeleted: true}}); // Query
     } finally{
@@ -221,16 +217,15 @@ app.post('/logout', async (request, response) =>{
 // Endpoint for adding a song to favorites
 app.post('/favorite', async(request,response) => {
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('users'); // Select cluster
         const result = await collection.findOne({'token': {'$eq': request.body.token}}); // Query
-        let hasIt = false
+        let hasIt = false;
         result.favoritesongs.forEach(song => {
-            if(song.id == request.body.song.id){
+            if(song.id === request.body.song.id){
                 hasIt = true;
             }
         });
@@ -247,12 +242,11 @@ app.post('/favorite', async(request,response) => {
 
 app.post('/getFavorites', async(request,response) => {
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
     let retVal = "";
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('users'); // Select cluster
         const result = await collection.findOne({token: request.body.token}); // Query
         retVal = result.favoritesongs;
@@ -264,26 +258,20 @@ app.post('/getFavorites', async(request,response) => {
 
 app.post('/checkIsFavorited', async(request,response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
-    retVal = false;
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
+    let retVal = false;
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('users'); // Select cluster
         const result = await collection.findOne({'token': {'$eq': request.body.token.token}}); // Query
         let hasIt = false
         result.favoritesongs.forEach(song => {
-            if(song.id == request.body.song.id){
+            if(song.id === request.body.song.id){
                 hasIt = true;
             }
         });
-        if(!hasIt){
-            retVal = false;
-        }
-        else{
-            retVal = true;
-        }
+        retVal = hasIt;
     } finally {
         await client.close();
         response.send(retVal);
@@ -292,12 +280,11 @@ app.post('/checkIsFavorited', async(request,response) =>{
 
 app.post('/getName', async(request,response) =>{
     const MongoClient = require('mongodb').MongoClient; // Establish Client
-    const uri = "mongodb+srv://LyricalGeniusDev:lyricalg3niuspass@cluster0.319vd.mongodb.net/lyricalgeniusdb1?retryWrites=true&w=majority"; // Database source
-    const client = new MongoClient(uri, {useUnifiedTopology: true}); // Link client with source
-    retVal = false;
+    const client = new MongoClient(mongoURI, {useUnifiedTopology: true}); // Link client with source
+    let retVal = false;
     try{
         await client.connect(); // Connect to db
-        const database = client.db('lyricalgeniusdb1'); // Select db
+        const database = client.db(mongoDB); // Select db
         const collection = database.collection('users'); // Select cluster
         const result = await collection.findOne({'token': {'$eq': request.body.token}}); // Query
         if(result){
@@ -313,11 +300,11 @@ app.post('/getName', async(request,response) =>{
 });
 
 app.post('/sendSMSTwillio', async (request, response) => {
-    return retVal = twilio.sendSMS(request.body.address,request.body.data);
+    return (twilio.sendSMS(request.body.address,request.body.data));
 });
 
 app.post('/sendWA', async (request, response) => {
-    return retVal = twilio.sendWA(request.body.address,request.body.data);
+    return (twilio.sendWA(request.body.address,request.body.data));
 });
 
 app.post('/sendEmail', async (request, response) => {
@@ -339,12 +326,14 @@ app.post('/sendEmail', async (request, response) => {
 
         if (emailRegex.test(address)) { // If email
 
-            gmail.sendEmail(address, messageString);
+            await gmail.sendEmail(address, messageString);
 
             response.send({type: true, msg: "Successfully sent lyrics to email!"});
 
         } else if (phoneRegex.test(address)) { // If phone
 
+
+            /*
             let tmobile = address + "@tmomail.net"
             let att = address + "@txt.att.net"
             let verizon = address + "@vtext.com"
@@ -353,7 +342,16 @@ app.post('/sendEmail', async (request, response) => {
             gmail.sendEmail(att, messageString);
             gmail.sendEmail(verizon, messageString);
 
-            response.send({type: true, msg: "Successfully sent lyrics to phone!"});
+            let retVal = twilio.sendSMS(address, [messageString]);
+            console.log(retVal);
+
+
+            if (retVal[1]) {
+                response.send({type: true, msg: "Successfully sent lyrics to phone!"});
+            } else {
+                response.send({type: false, msg: "Failed to send lyrics to phone!"});
+            }
+            */
 
         } else {
             response.send({type: false, msg: "Failure (Invalid input)"});
@@ -361,4 +359,4 @@ app.post('/sendEmail', async (request, response) => {
 
 });
 
-app.listen(port, () => console.log("Hello from the backend server"));
+app.listen(config.port, () => console.log("Hello from the backend server"));

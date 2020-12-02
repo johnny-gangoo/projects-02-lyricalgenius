@@ -31,7 +31,7 @@ class Navbar extends React.Component {
     if(!token){ //lyricalgenius user token
         window.location.href = './';
     }else{
-        axios.post("http://54.165.233.151:8083/verify", token).then(res => {
+        axios.post(process.env.REACT_APP_AXIOS_URL + "/verify", token).then(res => {
             if (res.data == "Invalid") {
                 window.location.href = './';
             }
@@ -47,7 +47,7 @@ class Navbar extends React.Component {
   handleSubmit = (event) => {
     if (this.state.title !== "" || this.state.name !== "") {
       event.preventDefault();
-      axios.post("http://54.165.233.151:8083/getSong", this.state).then(res => {
+      axios.post(process.env.REACT_APP_AXIOS_URL + "/getSong", this.state).then(res => {
         res = res.data;
         this.setState({ renderChild: false });
         if (res.length === 0) {
@@ -68,7 +68,7 @@ class Navbar extends React.Component {
     }
 
     songObj.map(async (songObj, index) => (
-      await axios.post("http://54.165.233.151:8083/getPreview", songObj).then(res => {
+      await axios.post(process.env.REACT_APP_AXIOS_URL + "/getPreview", songObj).then(res => {
         let new_state = Object.assign({}, this.state);
         let a = new_state.preview;
         a[index] = res.data;

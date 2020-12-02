@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import SendLyrics from "./phoneEmailAPI";
+import SendLyrics from "../sharePhoneEmail/phoneEmailAPI";
 
 
 function ModalForUserInput(props) {

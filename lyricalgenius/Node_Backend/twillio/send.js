@@ -1,13 +1,13 @@
-const axios = require('axios');
-const accountSid = 'AC63b06e4639b7e40090487af06a833f2f';
-const authToken = '3e8d42292039114ecdc0e7d2d0982a5b';
-const fromSMS = '+12055966060';
-const fromWA = 'whatsapp:+14155238886';
+let config = require("../config.js");
+const accountSid = config.twilio.accountSid;
+const authToken = config.twilio.authToken;
+const fromSMS = config.twilio.fromSMS;
+const fromWA = config.twilio.fromWA;
 const client = require('twilio')(accountSid, authToken);
 
 // Send text sms
 function sendSMS(number, messages){
-    messageStatus = [];
+    let messageStatus = [];
     messages.forEach(message =>{
         client.messages
         .create({
@@ -16,9 +16,11 @@ function sendSMS(number, messages){
             to: '+1' + number
         })
         .then(response => {
+            console.log("Success phone")
             messageStatus.push(true);
         })
         .catch(error => {
+            console.log("Fail phone")
             messageStatus.push(false);
         })
     });
@@ -28,7 +30,7 @@ function sendSMS(number, messages){
 
 //Send text whatsapp
 function sendWA(number, messages){
-    messageStatus = [];
+    let messageStatus = [];
     messages.forEach(message =>{
         client.messages
         .create({
