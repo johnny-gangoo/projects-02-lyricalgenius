@@ -30,7 +30,7 @@ class Register extends Component {
         //this will prevent data from refreshing
         event.preventDefault();
         //axios post will send the data to the backend in JSON format
-        axios.post(process.env.REACT_APP_AXIOS_URL + "/createAccount", this.state).then(response => {
+        axios.post("http://54.165.233.151:8083" + "/createAccount", this.state).then(response => {
             if(response.data != "User already exists."){
                 window.location.reload();
             }
