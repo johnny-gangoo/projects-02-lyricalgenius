@@ -13,7 +13,7 @@ class likeButton extends Component{
 
     async componentDidMount(){
         const token = getFromStorage("lgut")
-        axios.post("http://54.165.233.151:8083" + "/checkIsFavorited", {token: token, song: this.props.song.songData}).then((response) => {
+        axios.post("https://54.165.233.151:8083" + "/checkIsFavorited", {token: token, song: this.props.song.songData}).then((response) => {
             this.setState({
                 liked: response.data,
                 isChecking: false

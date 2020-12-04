@@ -18,12 +18,12 @@ class Charts extends Component {
         if(!token){ //lyricalgenius user token
             window.location.href = './';
         }else{
-            axios.post("http://54.165.233.151:8083" + "/verify", token).then(res => {
+            axios.post("https://54.165.233.151:8083" + "/verify", token).then(res => {
                 if (res.data == "Invalid") {
                     window.location.href = './';
                 }
                 else{ // Load data
-                    axios.post("http://54.165.233.151:8083" + "/getCharts", this.state)
+                    axios.post("https://54.165.233.151:8083" + "/getCharts", this.state)
                     .then(res => {
                         let entries = res.data;
                         let topCounts = [];
