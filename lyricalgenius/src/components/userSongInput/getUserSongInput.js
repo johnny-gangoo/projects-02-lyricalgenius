@@ -33,7 +33,6 @@ class GetUserInput extends Component {
         }
     }
 
-
     handleListItemOnClick = async (songObj) => {
         this.setState({ songObjIndex: this.props.songData.indexOf(songObj) });
         await axios.post(process.env.REACT_APP_AXIOS_URL + "/getLyrics", songObj).then(res => {

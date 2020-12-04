@@ -6,8 +6,6 @@ import SendLyrics from "../sharePhoneEmail/phoneEmailAPI";
 function ModalForUserInput(props) {
     const [lgShow, setLgShow] = useState(true);
   
-
-    //<SendLyrics LyricsArray={props.LyricsArray} /> 
     return (
       <>
         <Modal

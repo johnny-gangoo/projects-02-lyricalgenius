@@ -20,7 +20,6 @@ class DisplayLyrics extends Component {
       }
 
     sendSections = async () => {
-        // //will send to Vlad from here
         if (this.state.sections.length !== 0) {
             await this.setState({ isSectionsArrayEmpty: false })
         }else{
@@ -31,7 +30,6 @@ class DisplayLyrics extends Component {
 
     sendAll = async (allSections) => {
         await this.setState({ isSectionsArrayEmpty: false })
-        //will send to Vlad from here
         console.log(allSections);
     }
 
@@ -39,7 +37,6 @@ class DisplayLyrics extends Component {
         await this.setState({ clearColors: [...this.state.clearColors, index] })
         await this.setState({ sections: [...this.state.sections, songObj] });
 
-        console.log("Add to sections before " + this.state.sections)
     }
 
 
@@ -55,11 +52,9 @@ class DisplayLyrics extends Component {
         var index = array.indexOf(songObj)
         if (index !== -1) {
             array.splice(index, 1);
-            console.log("this is what we are removing " + this.state.sections[index])
             await this.setState({ sections: array });
         }
 
-        console.log("sections after " + this.state.sections)
     }
 
     clearAllClickedSections = (index) => {
@@ -80,7 +75,6 @@ class DisplayLyrics extends Component {
 
     resetState = async () => {
         await this.setState({ sections: [], clearColors: [] })
-        console.log("this is sections " + this.state.sections)
     }
 
     handleResetModal = async () => {
