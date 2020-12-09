@@ -11,7 +11,7 @@ class Signin extends Component {
     componentDidMount(){
         const token = getFromStorage("lgut");
         if(token){
-            axios.post("http://54.165.233.151:8083" + "/logout", {token: token}).then(res => {
+            axios.post(process.env.REACT_APP_AXIOS_URL + "/logout", {token: token}).then(res => {
             }).catch(error => {
                 console.log(error)
             });
