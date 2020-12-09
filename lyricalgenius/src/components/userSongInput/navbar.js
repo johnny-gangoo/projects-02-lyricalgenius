@@ -128,7 +128,7 @@ class Navbar extends React.Component {
                 <input class="form-control rounded-pill transparent-input mr-sm-2" placeholder='Enter the Artist name' name='name' onChange={this.handleInputChange.bind(this)} />
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style={{"marginRight": "10px"}}>Search</button>
               </form>
-              <FontAwesomeIcon size= '2x' icon={faSignOutAlt} className="img-fluid" style={{"color": "white","cursor": "pointer"}} onClick={() => {let token = getFromStorage("lgut"); axios.post("http://54.165.233.151:8083/logout", {token: token}).then(res => {window.location.href = "./";}).catch(error => {console.log(error)})}} />
+              <FontAwesomeIcon size= '2x' icon={faSignOutAlt} className="img-fluid" style={{"color": "white","cursor": "pointer"}} onClick={() => {let token = getFromStorage("lgut"); axios.post("http://"http://54.165.233.151:8083"/logout", {token: token}).then(res => {window.location.href = "./";}).catch(error => {console.log(error)})}} />
             </div>
           </nav>
 
