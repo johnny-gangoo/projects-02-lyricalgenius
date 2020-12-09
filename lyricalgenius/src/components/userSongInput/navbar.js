@@ -68,7 +68,7 @@ class Navbar extends React.Component {
     }
 
     songObj.map(async (songObj, index) => (
-      await axios.post("https://54.165.233.151:8083" + "/getPreview", songObj).then(res => {
+      await axios.post("http://54.165.233.151:8083" + "/getPreview", songObj).then(res => {
         let new_state = Object.assign({}, this.state);
         let a = new_state.preview;
         a[index] = res.data;
