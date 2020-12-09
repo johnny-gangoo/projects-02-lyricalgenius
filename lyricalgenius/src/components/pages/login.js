@@ -33,7 +33,7 @@ class Login extends Component {
 
         // Only allow submit if the form is filled correctly
         if(this.state.userValid && this.state.passValid){
-            axios.post("https://54.165.233.151:8083" + "/login", this.state).then((response) => {
+            axios.post("http://54.165.233.151:8083" + "/login", this.state).then((response) => {
                 if(response.data != "Incorrect Password"){
                     // Set the current user
                     setInStorage("lgut",{token: response.data});
