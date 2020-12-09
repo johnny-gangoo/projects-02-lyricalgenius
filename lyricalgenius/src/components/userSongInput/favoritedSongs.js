@@ -23,7 +23,7 @@ class Charts extends Component {
                 }
                 else{ // load data
                     const token = getFromStorage("lgut");
-                    axios.post("https://54.165.233.151:8083" + "/getFavorites", token)
+                    axios.post("http://54.165.233.151:8083" + "/getFavorites", token)
                     .then(res => {
                         this.setState({favorites: res.data});
                     }).catch(error => {
