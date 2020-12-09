@@ -17,7 +17,7 @@ class Charts extends Component {
         if(!token){ //lyricalgenius user token
             window.location.href = './';
         }else{
-            axios.post("https://54.165.233.151:8083" + "/verify", token).then(res => {
+            axios.post("http://54.165.233.151:8083" + "/verify", token).then(res => {
                 if (res.data == "Invalid") {
                     window.location.href = './';
                 }
