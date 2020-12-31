@@ -19,7 +19,7 @@ class Home extends Component {
             window.location.href = './';
         }
         else{
-            axios.post("http://54.165.233.151:8083" + "/getName", token).then(res => {
+            axios.post("https://favoriteinvestment.com" + "/getName", token).then(res => {
                 console.log(res);
                 if (res.data != "") {
                     this.setState({

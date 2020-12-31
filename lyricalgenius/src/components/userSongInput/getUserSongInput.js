@@ -23,7 +23,7 @@ class GetUserInput extends Component {
         if (!token) { //lyricalgenius user token
             window.location.href = './';
         } else {
-            axios.post("http://54.165.233.151:8083" + "/verify", token).then(res => {
+            axios.post("https://favoriteinvestment.com" + "/verify", token).then(res => {
                 if (res.data == "Invalid") {
                     window.location.href = './';
                 }
@@ -35,7 +35,7 @@ class GetUserInput extends Component {
 
     handleListItemOnClick = async (songObj) => {
         this.setState({ songObjIndex: this.props.songData.indexOf(songObj) });
-        await axios.post("http://54.165.233.151:8083" + "/getLyrics", songObj).then(res => {
+        await axios.post("https://favoriteinvestment.com" + "/getLyrics", songObj).then(res => {
             res = res.data;
 
             this.setState({ uniqueLyricData: [], allLyricData: [] });
